@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap');
+      body {
+        font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      }
+    </style>
+  </head>
+<body class="bg-[#0d0d0d] text-[#f3f1eb]">
+    <header class="sticky top-0 z-50 bg-[#0d0d0d]">
+      <div class="mx-auto grid max-w-6xl items-center gap-4 px-4 py-5 sm:grid-cols-[auto_1fr_auto] sm:px-6 lg:px-8">
+        <a href="/" class="text-lg font-semibold tracking-[0.24em] text-white uppercase">Juan Constructions</a>
+        <div class="hidden items-center justify-center gap-10 text-sm text-[#c7b08e] md:flex sm:justify-self-center">
+          <a href="#services" class="transition hover:text-white">Services</a>
+          <a href="#process" class="transition hover:text-white">Process</a>
+          <a href="#insights" class="transition hover:text-white">Insights</a>
+        </div>
+        <a href="#contact" class="inline-flex items-center justify-center rounded-sm border border-white/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#0d0d0d] transition hover:bg-[#f5f2e9]">Book a consult</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="relative overflow-hidden bg-[#0d0d0d] py-20 sm:py-20">
+        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(199,176,142,0.14),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.06),_transparent_25%)]"></div>
+        <div class="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
+          <div class="space-y-10 text-center lg:text-left relative z-10">
+            <div class="mx-auto inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm font-semibold uppercase tracking-[0.32em] text-[#f3f2ef]">Construction advisory</div>
+            <div class="space-y-8">
+              <h1 class="text-5xl font-black tracking-tight text-white sm:text-6xl">A better home starts with better build decisions.</h1>
+              <p class="mx-auto max-w-3xl text-lg leading-9 text-[#dbd3c8]">Juan Constructions delivers confident, considered real estate and construction services for buyers, sellers, and investors who value clarity, craft, and connection.</p>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center">
+              <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-white px-9 py-4 text-base font-semibold text-[#0d0d0d] transition hover:bg-[#f0ece2]">Book a consult</a>
+              <a href="#services" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-[#f3f2ef] transition hover:border-[#c7b08e] hover:text-[#c7b08e]">Explore services</a>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-3">
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
+                <p class="text-4xl font-black">120+</p>
+                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Deals closed</p>
+              </div>
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
+                <p class="text-4xl font-black">18%</p>
+                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Value uplift</p>
+              </div>
+              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
+                <p class="text-4xl font-black">95%</p>
+                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Repeat clients</p>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-6 relative z-10 lg:justify-self-center">
+            <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/20">
+              <div class="aspect-[4/3] bg-[url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"></div>
+            </div>
+            <div class="rounded-[2rem] border border-white/10 bg-[#121212]/80 p-8 text-white shadow-xl shadow-black/20">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#c7b08e]">Built with clarity</p>
+              <h2 class="mt-4 text-2xl font-black">Clean execution, modern delivery.</h2>
+              <p class="mt-4 text-[#beb6aa]">We build a streamlined plan with transparent communication, polished presentation, and expert negotiation support.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="bg-[#f8f7f0] py-24 sm:py-28">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">What we deliver</p>
+            <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">Focused capabilities for complex builds.</h2>
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#7b7162]">From project planning to market positioning, our services are designed to keep every phase thoughtful, deliberate, and highly visible.</p>
+          </div>
+          <div class="mt-12 grid gap-6 lg:grid-cols-3">
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Sell-side advisory</p>
+              <h3 class="mt-4 text-xl font-bold text-[#111111]">Strategic sales execution</h3>
+              <p class="mt-4 text-[#7b7162]">Professional listing strategy, precise pricing, and built-for-purpose marketing for premium results.</p>
+            </article>
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Buy-side services</p>
+              <h3 class="mt-4 text-xl font-bold text-[#111111]">Targeted acquisitions</h3>
+              <p class="mt-4 text-[#7b7162]">Buyer support with neighborhood insight, valuation focus, and offer clarity.</p>
+            </article>
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Portfolio support</p>
+              <h3 class="mt-4 text-xl font-bold text-[#111111]">Asset optimization</h3>
+              <p class="mt-4 text-[#7b7162]">Ongoing performance planning and asset review for high-value holdings.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="bg-white py-24 sm:py-28">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">How it works</p>
+              <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">A simple, block-based process.</h2>
+              <p class="mt-6 max-w-xl text-[#7b7162]">We deliver each transaction stage as a distinct, easy-to-follow milestone so clients feel confident and informed at every step.</p>
+              <div class="mt-10 grid gap-4 sm:grid-cols-2">
+                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">01</span>
+                  <p class="mt-4 text-lg font-black text-[#111111]">Strategy review</p>
+                </div>
+                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">02</span>
+                  <p class="mt-4 text-lg font-black text-[#111111]">Market launch</p>
+                </div>
+                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">03</span>
+                  <p class="mt-4 text-lg font-black text-[#111111]">Offers & closing</p>
+                </div>
+                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">04</span>
+                  <p class="mt-4 text-lg font-black text-[#111111]">Post-close care</p>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-3xl border border-[#e7dfd1] bg-[#fff5e8] p-8 shadow-xl shadow-black/5">
+              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Executive summary</p>
+              <h3 class="mt-4 text-2xl font-black text-[#111111]">Designed for high-value moves.</h3>
+              <p class="mt-4 text-[#7b7162]">Our process keeps everything clear and measurable, with a strong focus on timeline discipline and premium presentation.</p>
+              <div class="mt-8 grid gap-4 sm:grid-cols-2">
+                <div class="rounded-3xl bg-white p-5 shadow-xl shadow-black/5">
+                  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7a8b7d]">Market clarity</p>
+                </div>
+                <div class="rounded-3xl bg-white p-5 shadow-xl shadow-black/5">
+                  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7a8b7d]">Value protection</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="insights" class="bg-[#f8f7f0] py-24 sm:py-28">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">Why choose us</p>
+            <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">Modern construction advisory with a refined edge.</h2>
+            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#7b7162]">We pair disciplined process with thoughtful communication so every project feels controlled, elevated, and built to last.</p>
+          </div>
+          <div class="mt-12 grid gap-6 lg:grid-cols-3">
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <h3 class="text-xl font-black text-[#111111]">Personal guidance</h3>
+              <p class="mt-4 text-[#7b7162]">Direct access to the team and fast, honest updates at every step.</p>
+            </article>
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <h3 class="text-xl font-black text-[#111111]">Transparent communication</h3>
+              <p class="mt-4 text-[#7b7162]">Clear timeline reports, negotiation updates, and smart recommendations.</p>
+            </article>
+            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
+              <h3 class="text-xl font-black text-[#111111]">Professional marketing</h3>
+              <p class="mt-4 text-[#7b7162]">Clean listings, targeted outreach, and premium presentation for stronger interest.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="bg-[#111111] py-24 sm:py-28 text-white">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#c7b08e]">Ready to move forward?</p>
+              <h2 class="mt-4 text-4xl font-black tracking-tight text-white">Let's make your next property move clear and strong.</h2>
+              <p class="mt-6 text-base leading-8 text-[#d3ccbe]">Contact Juan Constructions for a structured plan and reliable execution.</p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <a href="mailto:hello@juanrealtor.com" class="inline-flex items-center justify-center rounded-sm bg-white px-8 py-4 text-base font-semibold text-[#0d0d0d] transition hover:bg-[#f5f2e9]">Schedule a consult</a>
+              <a href="tel:+1234567890" class="inline-flex items-center justify-center rounded-sm bg-[#1a1a1a] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#0f0f0f]">Call now</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-[#d7e5df] bg-white py-8">
+      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 text-sm text-[#6d7f72] sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <p>Juan Constructions — professional real estate advisory for buyers, sellers, and investors.</p>
+        <small>© <%= new Date().getFullYear() %> Juan Constructions</small>
+      </div>
+    </footer>
+  </body>
+</html>
