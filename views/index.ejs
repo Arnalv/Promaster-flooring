@@ -3,186 +3,184 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&display=swap');
-      body {
-        font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      }
-    </style>
+    <title>Promaster Floors — Dallas / Fort Worth Flooring Contractor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
-<body class="bg-[#0d0d0d] text-[#f3f1eb]">
-    <header class="sticky top-0 z-50 bg-[#0d0d0d]">
-      <div class="mx-auto grid max-w-6xl items-center gap-4 px-4 py-5 sm:grid-cols-[auto_1fr_auto] sm:px-6 lg:px-8">
-        <a href="/" class="text-lg font-semibold tracking-[0.24em] text-white uppercase">Juan Constructions</a>
-        <div class="hidden items-center justify-center gap-10 text-sm text-[#c7b08e] md:flex sm:justify-self-center">
-          <a href="#services" class="transition hover:text-white">Services</a>
-          <a href="#process" class="transition hover:text-white">Process</a>
-          <a href="#insights" class="transition hover:text-white">Insights</a>
-        </div>
-        <a href="#contact" class="inline-flex items-center justify-center rounded-sm border border-white/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#0d0d0d] transition hover:bg-[#f5f2e9]">Book a consult</a>
-      </div>
+  <body>
+    <header class="site-header" id="site-header">
+      <a href="/" class="site-header__logo">
+        <span class="mark">PM</span>
+        <h1 data-eid="brand-name">Promaster Floors</h1>
+      </a>
+      <ul class="site-header__nav">
+        <li><a href="#about" data-eid="nav-about">About</a></li>
+        <li><a href="#work" data-eid="nav-services">Services</a></li>
+        <li><a href="#process" data-eid="nav-whyus">Why Us</a></li>
+        <li><a href="#blog" data-eid="nav-blog">Blog</a></li>
+        <li><a href="#contact" class="nav-cta" data-eid="nav-contact">Contact Us</a></li>
+      </ul>
     </header>
 
     <main>
-      <section class="relative overflow-hidden bg-[#0d0d0d] py-20 sm:py-20">
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(199,176,142,0.14),_transparent_25%),radial-gradient(circle_at_bottom_right,_rgba(255,255,255,0.06),_transparent_25%)]"></div>
-        <div class="mx-auto grid max-w-6xl gap-16 px-4 sm:px-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:px-8">
-          <div class="space-y-10 text-center lg:text-left relative z-10">
-            <div class="mx-auto inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm font-semibold uppercase tracking-[0.32em] text-[#f3f2ef]">Construction advisory</div>
-            <div class="space-y-8">
-              <h1 class="text-5xl font-black tracking-tight text-white sm:text-6xl">A better home starts with better build decisions.</h1>
-              <p class="mx-auto max-w-3xl text-lg leading-9 text-[#dbd3c8]">Juan Constructions delivers confident, considered real estate and construction services for buyers, sellers, and investors who value clarity, craft, and connection.</p>
-            </div>
-            <div class="flex flex-col items-center justify-center gap-4 sm:flex-row sm:items-center">
-              <a href="#contact" class="inline-flex items-center justify-center rounded-full bg-white px-9 py-4 text-base font-semibold text-[#0d0d0d] transition hover:bg-[#f0ece2]">Book a consult</a>
-              <a href="#services" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-[#f3f2ef] transition hover:border-[#c7b08e] hover:text-[#c7b08e]">Explore services</a>
-            </div>
-            <div class="grid gap-4 sm:grid-cols-3">
-              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
-                <p class="text-4xl font-black">120+</p>
-                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Deals closed</p>
-              </div>
-              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
-                <p class="text-4xl font-black">18%</p>
-                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Value uplift</p>
-              </div>
-              <div class="rounded-3xl border border-white/10 bg-white/5 p-6 text-white shadow-xl shadow-black/15">
-                <p class="text-4xl font-black">95%</p>
-                <p class="mt-3 text-sm uppercase tracking-[0.24em] text-[#c7b08e]">Repeat clients</p>
-              </div>
-            </div>
-          </div>
-          <div class="space-y-6 relative z-10 lg:justify-self-center">
-            <div class="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl shadow-black/20">
-              <div class="aspect-[4/3] bg-[url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center"></div>
-            </div>
-            <div class="rounded-[2rem] border border-white/10 bg-[#121212]/80 p-8 text-white shadow-xl shadow-black/20">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#c7b08e]">Built with clarity</p>
-              <h2 class="mt-4 text-2xl font-black">Clean execution, modern delivery.</h2>
-              <p class="mt-4 text-[#beb6aa]">We build a streamlined plan with transparent communication, polished presentation, and expert negotiation support.</p>
-            </div>
-          </div>
+      <section class="hero">
+        <div class="hero__bg" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+        <div class="hero__shadow"></div>
+        <div class="hero__content">
+          <h1 data-eid="hero-heading">Expert Flooring Services in Dallas / Fort Worth</h1>
+          <p data-eid="hero-text">We use our years of experience and expertise to complete your project with perfection. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.</p>
+          <a href="#contact" class="btn btn-dark" data-eid="hero-cta">Get a Free Estimate</a>
         </div>
       </section>
 
-      <section id="services" class="bg-[#f8f7f0] py-24 sm:py-28">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="text-center">
-            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">What we deliver</p>
-            <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">Focused capabilities for complex builds.</h2>
-            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#7b7162]">From project planning to market positioning, our services are designed to keep every phase thoughtful, deliberate, and highly visible.</p>
-          </div>
-          <div class="mt-12 grid gap-6 lg:grid-cols-3">
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Sell-side advisory</p>
-              <h3 class="mt-4 text-xl font-bold text-[#111111]">Strategic sales execution</h3>
-              <p class="mt-4 text-[#7b7162]">Professional listing strategy, precise pricing, and built-for-purpose marketing for premium results.</p>
-            </article>
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Buy-side services</p>
-              <h3 class="mt-4 text-xl font-bold text-[#111111]">Targeted acquisitions</h3>
-              <p class="mt-4 text-[#7b7162]">Buyer support with neighborhood insight, valuation focus, and offer clarity.</p>
-            </article>
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Portfolio support</p>
-              <h3 class="mt-4 text-xl font-bold text-[#111111]">Asset optimization</h3>
-              <p class="mt-4 text-[#7b7162]">Ongoing performance planning and asset review for high-value holdings.</p>
-            </article>
-          </div>
-        </div>
+      <section class="top-workplaces" id="about">
+        <h2 data-eid="feat-eyebrow-1">About Promaster Floors</h2>
+        <p data-eid="feat-text-1">Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.</p>
       </section>
 
-      <section id="process" class="bg-white py-24 sm:py-28">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">How it works</p>
-              <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">A simple, block-based process.</h2>
-              <p class="mt-6 max-w-xl text-[#7b7162]">We deliver each transaction stage as a distinct, easy-to-follow milestone so clients feel confident and informed at every step.</p>
-              <div class="mt-10 grid gap-4 sm:grid-cols-2">
-                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
-                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">01</span>
-                  <p class="mt-4 text-lg font-black text-[#111111]">Strategy review</p>
-                </div>
-                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
-                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">02</span>
-                  <p class="mt-4 text-lg font-black text-[#111111]">Market launch</p>
-                </div>
-                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
-                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">03</span>
-                  <p class="mt-4 text-lg font-black text-[#111111]">Offers & closing</p>
-                </div>
-                <div class="rounded-3xl border border-[#e7dfd1] bg-[#faf6f1] p-6 shadow-xl shadow-black/5">
-                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-sm bg-[#a18c6d] text-sm font-semibold text-white">04</span>
-                  <p class="mt-4 text-lg font-black text-[#111111]">Post-close care</p>
-                </div>
-              </div>
+      <section class="work-section" id="work">
+        <div class="work__head">
+          <h2 data-eid="work-heading">Our Services</h2>
+          <p data-eid="work-subtitle">From hardwood installation to refinishing and repairs, we bring quality craftsmanship to every project.</p>
+        </div>
+        <div class="work-grid">
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc1-eyebrow">Hardwood Flooring</h3>
+              <p data-eid="svc1-text">Expert installation of solid and engineered hardwood flooring. We work with premium materials to deliver beautiful, long-lasting results for your home or business.</p>
             </div>
-            <div class="rounded-3xl border border-[#e7dfd1] bg-[#fff5e8] p-8 shadow-xl shadow-black/5">
-              <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#a18c6d]">Executive summary</p>
-              <h3 class="mt-4 text-2xl font-black text-[#111111]">Designed for high-value moves.</h3>
-              <p class="mt-4 text-[#7b7162]">Our process keeps everything clear and measurable, with a strong focus on timeline discipline and premium presentation.</p>
-              <div class="mt-8 grid gap-4 sm:grid-cols-2">
-                <div class="rounded-3xl bg-white p-5 shadow-xl shadow-black/5">
-                  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7a8b7d]">Market clarity</p>
-                </div>
-                <div class="rounded-3xl bg-white p-5 shadow-xl shadow-black/5">
-                  <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#7a8b7d]">Value protection</p>
-                </div>
-              </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc2-eyebrow">Wood Floor Refinishing</h3>
+              <p data-eid="svc2-text">Bring your old floors back to life with our professional refinishing services. Sanding, staining, and sealing to restore the natural beauty of your hardwood floors.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc3-eyebrow">Laminate &amp; Vinyl</h3>
+              <p data-eid="svc3-text">High-quality laminate and vinyl flooring installation. Waterproof options, durable finishes, and styles that mimic natural materials at affordable prices.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc-eyebrow">Floor Repair</h3>
+              <p data-eid="svc-copy">Partial or full-floor repairs for damaged hardwood, laminate, and vinyl flooring. We fix warped boards, scratches, gaps, and more to make your floors look like new.</p>
             </div>
           </div>
         </div>
-      </section>
-
-      <section id="insights" class="bg-[#f8f7f0] py-24 sm:py-28">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="text-center">
-            <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#a18c6d]">Why choose us</p>
-            <h2 class="mt-4 text-3xl font-black tracking-tight text-[#111111] sm:text-4xl">Modern construction advisory with a refined edge.</h2>
-            <p class="mx-auto mt-6 max-w-2xl text-base leading-8 text-[#7b7162]">We pair disciplined process with thoughtful communication so every project feels controlled, elevated, and built to last.</p>
-          </div>
-          <div class="mt-12 grid gap-6 lg:grid-cols-3">
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <h3 class="text-xl font-black text-[#111111]">Personal guidance</h3>
-              <p class="mt-4 text-[#7b7162]">Direct access to the team and fast, honest updates at every step.</p>
-            </article>
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <h3 class="text-xl font-black text-[#111111]">Transparent communication</h3>
-              <p class="mt-4 text-[#7b7162]">Clear timeline reports, negotiation updates, and smart recommendations.</p>
-            </article>
-            <article class="rounded-3xl border border-[#e7dfd1] bg-white p-8 shadow-xl shadow-black/5">
-              <h3 class="text-xl font-black text-[#111111]">Professional marketing</h3>
-              <p class="mt-4 text-[#7b7162]">Clean listings, targeted outreach, and premium presentation for stronger interest.</p>
-            </article>
-          </div>
+        <div class="work-cta">
+          <a href="#contact" class="btn btn-dark" data-eid="work-cta">Request a Quote</a>
         </div>
       </section>
 
-      <section id="contact" class="bg-[#111111] py-24 sm:py-28 text-white">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.32em] text-[#c7b08e]">Ready to move forward?</p>
-              <h2 class="mt-4 text-4xl font-black tracking-tight text-white">Let's make your next property move clear and strong.</h2>
-              <p class="mt-6 text-base leading-8 text-[#d3ccbe]">Contact Juan Constructions for a structured plan and reliable execution.</p>
+      <section class="cta-banner" id="process">
+        <h2 data-eid="feat-eyebrow-2">Quality workmanship. Honest pricing. Your satisfaction guaranteed.</h2>
+        <a href="#contact" class="btn btn-outline-light" data-eid="cta-btn">Call (214) 916-6859</a>
+      </section>
+
+      <section class="blog-section" id="blog">
+        <h2 data-eid="card3-eyebrow">From Our Blog</h2>
+        <p data-eid="card3-text">Tips, advice, and insights on flooring installation, maintenance, and care from our experienced team.</p>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1566272726777-91f06285e3c9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 data-eid="card3-heading">Hardwood vs. Laminate: Which is Right for You?</h3>
+              <p data-eid="blog-card1-text">Compare the benefits of solid hardwood, engineered wood, and laminate flooring to find the best fit for your home and budget.</p>
             </div>
-            <div class="grid gap-4 sm:grid-cols-2">
-              <a href="mailto:hello@juanrealtor.com" class="inline-flex items-center justify-center rounded-sm bg-white px-8 py-4 text-base font-semibold text-[#0d0d0d] transition hover:bg-[#f5f2e9]">Schedule a consult</a>
-              <a href="tel:+1234567890" class="inline-flex items-center justify-center rounded-sm bg-[#1a1a1a] px-8 py-4 text-base font-semibold text-white transition hover:bg-[#0f0f0f]">Call now</a>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1637858565635-ae027c4da77e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 data-eid="card1-heading">When to Refinish vs. Replace Your Hardwood Floors</h3>
+              <p data-eid="card1-text">Not sure whether your floors need refinishing or full replacement? Our guide breaks down the signs and costs of each option.</p>
             </div>
-          </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 data-eid="card2-eyebrow">5 Tips for Maintaining Your Hardwood Floors</h3>
+              <p data-eid="blog-card3-text">Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.</p>
+            </div>
+          </article>
+        </div>
+        <div class="blog-cta">
+          <a href="#contact" class="btn btn-dark" data-eid="blog-cta">Get Free Estimate</a>
+        </div>
+      </section>
+
+      <section class="newsletter-section" id="contact">
+        <h3 data-eid="newsletter-eyebrow">Get a Free Estimate</h3>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your Email Address" />
+          <button class="btn btn-dark" data-eid="newsletter-btn">Send Request</button>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-[#d7e5df] bg-white py-8">
-      <div class="mx-auto flex max-w-6xl flex-col gap-3 px-6 text-sm text-[#6d7f72] sm:flex-row sm:items-center sm:justify-between lg:px-8">
-        <p>Juan Constructions — professional real estate advisory for buyers, sellers, and investors.</p>
-        <small>© <%= new Date().getFullYear() %> Juan Constructions</small>
+    <footer class="site-footer">
+      <div class="site-footer__logo">
+        <span class="mark">PM</span>
+        <h2 data-eid="footer-text">Promaster Floors</h2>
+      </div>
+      <div class="site-footer__nav">
+        <a href="#about" data-eid="footer-nav-about">About</a>
+        <a href="#work" data-eid="footer-nav-services">Services</a>
+        <a href="#blog" data-eid="footer-nav-blog">Blog</a>
+        <a href="#contact" data-eid="footer-nav-estimate">Free Estimate</a>
+      </div>
+      <div class="site-footer__locations">
+        <div class="footer-location">
+          <h4 data-eid="footer-loc1-heading">Service Area</h4>
+          <p data-eid="footer-loc1-text">Dallas / Fort Worth<br />&amp; surrounding areas<br />Texas</p>
+        </div>
+        <div class="footer-location">
+          <h4 data-eid="footer-loc2-heading">Contact</h4>
+          <p data-eid="footer-loc2-text">Phone: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217</p>
+        </div>
+        <div class="footer-location">
+          <h4 data-eid="footer-loc3-heading">Hours</h4>
+          <p data-eid="footer-loc3-text">Open 7 days a week<br />Free estimates<br />Call anytime</p>
+        </div>
+        <div class="footer-location">
+          <h4 data-eid="footer-loc4-heading">Info</h4>
+          <p data-eid="footer-loc4-text">Se habla espanol<br />Veteran owned<br />Licensed &amp; insured</p>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="social-links">
+          <a href="#" target="_blank" aria-label="Facebook">FB</a>
+          <a href="#" target="_blank" aria-label="Instagram">IG</a>
+        </div>
+        <small data-eid="footer-copyright">&copy; <%= new Date().getFullYear() %> Promaster Floors</small>
       </div>
     </footer>
+
+    <script>
+      (function() {
+        var header = document.getElementById("site-header");
+        var ticking = false;
+        window.addEventListener("scroll", function() {
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+              } else {
+                header.classList.remove("scrolled");
+              }
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

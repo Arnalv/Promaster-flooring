@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit — Promaster Floors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .edit-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 9999;
+        background: #111;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.6rem 2rem;
+        font-family: 'Lato', sans-serif;
+      }
+      .edit-bar-title {
+        font-weight: 700;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+      }
+      .edit-bar-actions {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .edit-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        border-radius: 0;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .edit-btn-primary {
+        background: #cc092f;
+        color: #fff;
+        border: none;
+      }
+      .edit-btn-primary:hover {
+        background: #a80726;
+      }
+      .edit-btn-outline {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+      .edit-btn-outline:hover {
+        border-color: #fff;
+      }
+      .edit-btn-saved {
+        background: #1a7a3a;
+      }
+      .edit-bar-status {
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.5);
+      }
+      [contenteditable="true"] {
+        cursor: text;
+        outline: none;
+        transition: box-shadow 0.15s ease;
+      }
+      [contenteditable="true"]:hover {
+        box-shadow: 0 0 0 2px rgba(204, 9, 47, 0.3);
+      }
+      [contenteditable="true"]:focus {
+        box-shadow: 0 0 0 2px rgba(204, 9, 47, 0.6);
+        background: rgba(255,255,255,0.4);
+      }
+      .edit-header-push {
+        padding-top: 52px;
+      }
+      .edit-header-push .site-header {
+        top: 52px;
+      }
+      @media (max-width: 760px) {
+        .edit-bar {
+          padding: 0.5rem 1rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .edit-header-push {
+          padding-top: 80px;
+        }
+        .edit-header-push .site-header {
+          top: 80px;
+        }
+      }
+    </style>
+  </head>
+  <body class="edit-header-push">
+    <div class="edit-bar">
+      <span class="edit-bar-title">Edit Mode</span>
+      <div class="edit-bar-actions">
+        <span class="edit-bar-status" id="edit-status"></span>
+        <a href="/" class="edit-btn edit-btn-outline">View Site</a>
+        <button class="edit-btn edit-btn-primary" id="save-btn">Save Changes</button>
+      </div>
+    </div>
+
+    <header class="site-header" id="site-header">
+      <a href="/" class="site-header__logo">
+        <span class="mark">PM</span>
+        <h1 contenteditable="true" data-eid="brand-name">Promaster Floors</h1>
+      </a>
+      <ul class="site-header__nav">
+        <li><a href="#about" contenteditable="true" data-eid="nav-about">About</a></li>
+        <li><a href="#work" contenteditable="true" data-eid="nav-services">Services</a></li>
+        <li><a href="#process" contenteditable="true" data-eid="nav-whyus">Why Us</a></li>
+        <li><a href="#blog" contenteditable="true" data-eid="nav-blog">Blog</a></li>
+        <li><a href="#contact" class="nav-cta" contenteditable="true" data-eid="nav-contact">Contact Us</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero__bg" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+        <div class="hero__shadow"></div>
+        <div class="hero__content">
+          <h1 contenteditable="true" data-eid="hero-heading">Expert Flooring Services in Dallas / Fort Worth</h1>
+          <p contenteditable="true" data-eid="hero-text">We use our years of experience and expertise to complete your project with perfection. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.</p>
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="hero-cta">Get a Free Estimate</a>
+        </div>
+      </section>
+
+      <section class="top-workplaces" id="about">
+        <h2 contenteditable="true" data-eid="feat-eyebrow-1">About Promaster Floors</h2>
+        <p contenteditable="true" data-eid="feat-text-1">Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.</p>
+      </section>
+
+      <section class="work-section" id="work">
+        <div class="work__head">
+          <h2 contenteditable="true" data-eid="work-heading">Our Services</h2>
+          <p contenteditable="true" data-eid="work-subtitle">From hardwood installation to refinishing and repairs, we bring quality craftsmanship to every project.</p>
+        </div>
+        <div class="work-grid">
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc1-eyebrow">Hardwood Flooring</h3>
+              <p contenteditable="true" data-eid="svc1-text">Expert installation of solid and engineered hardwood flooring. We work with premium materials to deliver beautiful, long-lasting results for your home or business.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc2-eyebrow">Wood Floor Refinishing</h3>
+              <p contenteditable="true" data-eid="svc2-text">Bring your old floors back to life with our professional refinishing services. Sanding, staining, and sealing to restore the natural beauty of your hardwood floors.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc3-eyebrow">Laminate &amp; Vinyl</h3>
+              <p contenteditable="true" data-eid="svc3-text">High-quality laminate and vinyl flooring installation. Waterproof options, durable finishes, and styles that mimic natural materials at affordable prices.</p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc-eyebrow">Floor Repair</h3>
+              <p contenteditable="true" data-eid="svc-copy">Partial or full-floor repairs for damaged hardwood, laminate, and vinyl flooring. We fix warped boards, scratches, gaps, and more to make your floors look like new.</p>
+            </div>
+          </div>
+        </div>
+        <div class="work-cta">
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="work-cta">Request a Quote</a>
+        </div>
+      </section>
+
+      <section class="cta-banner" id="process">
+        <h2 contenteditable="true" data-eid="feat-eyebrow-2">Quality workmanship. Honest pricing. Your satisfaction guaranteed.</h2>
+        <a href="#contact" class="btn btn-outline-light" contenteditable="true" data-eid="cta-btn">Call (214) 916-6859</a>
+      </section>
+
+      <section class="blog-section" id="blog">
+        <h2 contenteditable="true" data-eid="card3-eyebrow">From Our Blog</h2>
+        <p contenteditable="true" data-eid="card3-text">Tips, advice, and insights on flooring installation, maintenance, and care from our experienced team.</p>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1566272726777-91f06285e3c9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 contenteditable="true" data-eid="card3-heading">Hardwood vs. Laminate: Which is Right for You?</h3>
+              <p contenteditable="true" data-eid="blog-card1-text">Compare the benefits of solid hardwood, engineered wood, and laminate flooring to find the best fit for your home and budget.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1637858565635-ae027c4da77e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 contenteditable="true" data-eid="card1-heading">When to Refinish vs. Replace Your Hardwood Floors</h3>
+              <p contenteditable="true" data-eid="card1-text">Not sure whether your floors need refinishing or full replacement? Our guide breaks down the signs and costs of each option.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="blog-card__body">
+              <h3 contenteditable="true" data-eid="card2-eyebrow">5 Tips for Maintaining Your Hardwood Floors</h3>
+              <p contenteditable="true" data-eid="blog-card3-text">Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.</p>
+            </div>
+          </article>
+        </div>
+        <div class="blog-cta">
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="blog-cta">Get Free Estimate</a>
+        </div>
+      </section>
+
+      <section class="newsletter-section" id="contact">
+        <h3 contenteditable="true" data-eid="newsletter-eyebrow">Get a Free Estimate</h3>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your Email Address" />
+          <button class="btn btn-dark" contenteditable="true" data-eid="newsletter-btn">Send Request</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__logo">
+        <span class="mark">PM</span>
+        <h2 contenteditable="true" data-eid="footer-text">Promaster Floors</h2>
+      </div>
+      <div class="site-footer__nav">
+        <a href="#about" contenteditable="true" data-eid="footer-nav-about">About</a>
+        <a href="#work" contenteditable="true" data-eid="footer-nav-services">Services</a>
+        <a href="#blog" contenteditable="true" data-eid="footer-nav-blog">Blog</a>
+        <a href="#contact" contenteditable="true" data-eid="footer-nav-estimate">Free Estimate</a>
+      </div>
+      <div class="site-footer__locations">
+        <div class="footer-location">
+          <h4 contenteditable="true" data-eid="footer-loc1-heading">Service Area</h4>
+          <p contenteditable="true" data-eid="footer-loc1-text">Dallas / Fort Worth<br />&amp; surrounding areas<br />Texas</p>
+        </div>
+        <div class="footer-location">
+          <h4 contenteditable="true" data-eid="footer-loc2-heading">Contact</h4>
+          <p contenteditable="true" data-eid="footer-loc2-text">Phone: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217</p>
+        </div>
+        <div class="footer-location">
+          <h4 contenteditable="true" data-eid="footer-loc3-heading">Hours</h4>
+          <p contenteditable="true" data-eid="footer-loc3-text">Open 7 days a week<br />Free estimates<br />Call anytime</p>
+        </div>
+        <div class="footer-location">
+          <h4 contenteditable="true" data-eid="footer-loc4-heading">Info</h4>
+          <p contenteditable="true" data-eid="footer-loc4-text">Se habla espanol<br />Veteran owned<br />Licensed &amp; insured</p>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        <div class="social-links">
+          <a href="#" target="_blank" aria-label="Facebook">FB</a>
+          <a href="#" target="_blank" aria-label="Instagram">IG</a>
+        </div>
+        <small contenteditable="true" data-eid="footer-copyright">&copy; <%= new Date().getFullYear() %> Promaster Floors</small>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var saveBtn = document.getElementById("save-btn");
+        var statusEl = document.getElementById("edit-status");
+        var pending = false;
+
+        function collectEdits() {
+          var els = document.querySelectorAll("[data-eid]");
+          var edits = {};
+          for (var i = 0; i < els.length; i++) {
+            var el = els[i];
+            var id = el.getAttribute("data-eid");
+            edits[id] = el.innerHTML;
+          }
+          return edits;
+        }
+
+        function setStatus(msg, isError) {
+          statusEl.textContent = msg;
+          statusEl.style.color = isError ? "#ff6b6b" : "rgba(255,255,255,0.5)";
+        }
+
+        saveBtn.addEventListener("click", function () {
+          if (pending) return;
+          pending = true;
+          saveBtn.textContent = "Saving...";
+          saveBtn.disabled = true;
+          setStatus("");
+
+          var edits = collectEdits();
+
+          fetch("/api/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ edits: edits }),
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error("Server error");
+              return r.json();
+            })
+            .then(function (data) {
+              if (data.success) {
+                setStatus("Saved!");
+                saveBtn.textContent = "Saved";
+                saveBtn.classList.add("edit-btn-saved");
+                setTimeout(function () {
+                  saveBtn.textContent = "Save Changes";
+                  saveBtn.classList.remove("edit-btn-saved");
+                  setStatus("");
+                }, 2000);
+              } else {
+                throw new Error(data.error || "Unknown error");
+              }
+            })
+            .catch(function (err) {
+              setStatus("Error: " + err.message, true);
+              saveBtn.textContent = "Save Changes";
+            })
+            .finally(function () {
+              pending = false;
+              saveBtn.disabled = false;
+            });
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+            e.preventDefault();
+            saveBtn.click();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>
