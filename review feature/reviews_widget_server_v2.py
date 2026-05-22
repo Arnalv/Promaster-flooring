@@ -342,7 +342,7 @@ WIDGET_TEMPLATE = """
 </html>
 """
 
-@app.route("/")
+@app.route("/api")
 def widget():
     """Serve the widget HTML."""
     return render_template_string(WIDGET_TEMPLATE, angi_url=ANGI_URL)
@@ -367,7 +367,7 @@ def api_images():
             })
     return jsonify({"images": images})
 
-@app.route("/image/<filename>")
+@app.route("//image/<filename>")
 def serve_image(filename):
     """Serve image from _reviews_images/ folder."""
     if ".." in filename or "/" in filename:
