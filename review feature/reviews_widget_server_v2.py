@@ -342,7 +342,7 @@ WIDGET_TEMPLATE = """
 </html>
 """
 
-@app.route("/api")
+@app.route("/")
 def widget():
     """Serve the widget HTML."""
     return render_template_string(WIDGET_TEMPLATE, angi_url=ANGI_URL)
