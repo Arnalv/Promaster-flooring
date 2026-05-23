@@ -69,6 +69,40 @@
         font-size: 0.8rem;
         color: rgba(255,255,255,0.5);
       }
+      .edit-btn-lang {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.3);
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        font-weight: 400;
+        cursor: pointer;
+      }
+      .edit-btn-lang:hover {
+        border-color: #fff;
+      }
+      .edit-btn-lang.active {
+        background: #cc092f;
+        border-color: #cc092f;
+        font-weight: 700;
+      }
+      .lang-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+        color: rgba(255,255,255,0.5);
+        padding: 0.3rem 0.6rem;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+      .lang-indicator .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+      .lang-indicator .dot.en { background: #4caf50; }
+      .lang-indicator .dot.es { background: #ff9800; }
       [contenteditable="true"] {
         cursor: text;
         outline: none;
@@ -80,6 +114,13 @@
       [contenteditable="true"]:focus {
         box-shadow: 0 0 0 2px rgba(204, 9, 47, 0.6);
         background: rgba(255,255,255,0.4);
+      }
+      [contenteditable="true"].editing-es {
+        box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.4);
+      }
+      [contenteditable="true"].editing-es:focus {
+        box-shadow: 0 0 0 2px rgba(255, 152, 0, 0.7);
+        background: rgba(255, 243, 224, 0.4);
       }
       .edit-header-push {
         padding-top: 52px;
@@ -106,8 +147,15 @@
     <div class="edit-bar">
       <span class="edit-bar-title">Edit Mode</span>
       <div class="edit-bar-actions">
+        <span class="lang-indicator">
+          <span class="dot en" id="lang-dot"></span>
+          <span id="lang-display">Editing: English</span>
+        </span>
+        <button class="edit-btn-lang active" id="lang-en-btn">EN</button>
+        <button class="edit-btn-lang" id="lang-es-btn">ES</button>
         <span class="edit-bar-status" id="edit-status"></span>
         <a href="/" class="edit-btn edit-btn-outline">View Site</a>
+        <button class="edit-btn edit-btn-outline" id="restore-btn">Revert to Last Save</button>
         <button class="edit-btn edit-btn-primary" id="save-btn">Save Changes</button>
       </div>
     </div>
@@ -115,14 +163,14 @@
     <header class="site-header" id="site-header">
       <a href="/" class="site-header__logo">
         <span class="mark">PM</span>
-        <h1 contenteditable="true" data-eid="brand-name">Promaster Floors</h1>
+        <h1 contenteditable="true" data-eid="brand-name"><%- contentByLang.en['brand-name'] %></h1>
       </a>
       <ul class="site-header__nav">
-        <li><a href="#about" contenteditable="true" data-eid="nav-about">About</a></li>
-        <li><a href="#work" contenteditable="true" data-eid="nav-services">Services</a></li>
-        <li><a href="#process" contenteditable="true" data-eid="nav-whyus">Why Us</a></li>
-        <li><a href="#blog" contenteditable="true" data-eid="nav-blog">Blog</a></li>
-        <li><a href="#contact" class="nav-cta" contenteditable="true" data-eid="nav-contact">Contact Us</a></li>
+        <li><a href="#about" contenteditable="true" data-eid="nav-about"><%- contentByLang.en['nav-about'] %></a></li>
+        <li><a href="#work" contenteditable="true" data-eid="nav-services"><%- contentByLang.en['nav-services'] %></a></li>
+        <li><a href="#process" contenteditable="true" data-eid="nav-whyus"><%- contentByLang.en['nav-whyus'] %></a></li>
+        <li><a href="#blog" contenteditable="true" data-eid="nav-blog"><%- contentByLang.en['nav-blog'] %></a></li>
+        <li><a href="#contact" class="nav-cta" contenteditable="true" data-eid="nav-contact"><%- contentByLang.en['nav-contact'] %></a></li>
       </ul>
     </header>
 
@@ -131,98 +179,98 @@
         <div class="hero__bg" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
         <div class="hero__shadow"></div>
         <div class="hero__content">
-          <h1 contenteditable="true" data-eid="hero-heading">Expert Flooring Services in Dallas / Fort Worth</h1>
-          <p contenteditable="true" data-eid="hero-text">We use our years of experience and expertise to complete your project with perfection. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.</p>
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="hero-cta">Get a Free Estimate</a>
+          <h1 contenteditable="true" data-eid="hero-heading"><%- contentByLang.en['hero-heading'] %></h1>
+          <p contenteditable="true" data-eid="hero-text"><%- contentByLang.en['hero-text'] %></p>
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="hero-cta"><%- contentByLang.en['hero-cta'] %></a>
         </div>
       </section>
 
       <section class="top-workplaces" id="about">
-        <h2 contenteditable="true" data-eid="feat-eyebrow-1">About Promaster Floors</h2>
-        <p contenteditable="true" data-eid="feat-text-1">Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.</p>
+        <h2 contenteditable="true" data-eid="feat-eyebrow-1"><%- contentByLang.en['feat-eyebrow-1'] %></h2>
+        <p contenteditable="true" data-eid="feat-text-1"><%- contentByLang.en['feat-text-1'] %></p>
       </section>
 
       <section class="work-section" id="work">
         <div class="work__head">
-          <h2 contenteditable="true" data-eid="work-heading">Our Services</h2>
-          <p contenteditable="true" data-eid="work-subtitle">From hardwood installation to refinishing and repairs, we bring quality craftsmanship to every project.</p>
+          <h2 contenteditable="true" data-eid="work-heading"><%- contentByLang.en['work-heading'] %></h2>
+          <p contenteditable="true" data-eid="work-subtitle"><%- contentByLang.en['work-subtitle'] %></p>
         </div>
         <div class="work-grid">
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 contenteditable="true" data-eid="svc1-eyebrow">Hardwood Flooring</h3>
-              <p contenteditable="true" data-eid="svc1-text">Expert installation of solid and engineered hardwood flooring. We work with premium materials to deliver beautiful, long-lasting results for your home or business.</p>
+              <h3 contenteditable="true" data-eid="svc1-eyebrow"><%- contentByLang.en['svc1-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc1-text"><%- contentByLang.en['svc1-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 contenteditable="true" data-eid="svc2-eyebrow">Wood Floor Refinishing</h3>
-              <p contenteditable="true" data-eid="svc2-text">Bring your old floors back to life with our professional refinishing services. Sanding, staining, and sealing to restore the natural beauty of your hardwood floors.</p>
+              <h3 contenteditable="true" data-eid="svc2-eyebrow"><%- contentByLang.en['svc2-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc2-text"><%- contentByLang.en['svc2-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 contenteditable="true" data-eid="svc3-eyebrow">Laminate &amp; Vinyl</h3>
-              <p contenteditable="true" data-eid="svc3-text">High-quality laminate and vinyl flooring installation. Waterproof options, durable finishes, and styles that mimic natural materials at affordable prices.</p>
+              <h3 contenteditable="true" data-eid="svc3-eyebrow"><%- contentByLang.en['svc3-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc3-text"><%- contentByLang.en['svc3-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 contenteditable="true" data-eid="svc-eyebrow">Floor Repair</h3>
-              <p contenteditable="true" data-eid="svc-copy">Partial or full-floor repairs for damaged hardwood, laminate, and vinyl flooring. We fix warped boards, scratches, gaps, and more to make your floors look like new.</p>
+              <h3 contenteditable="true" data-eid="svc-eyebrow"><%- contentByLang.en['svc-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc-copy"><%- contentByLang.en['svc-copy'] %></p>
             </div>
           </div>
         </div>
         <div class="work-cta">
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="work-cta">Request a Quote</a>
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="work-cta"><%- contentByLang.en['work-cta'] %></a>
         </div>
       </section>
 
       <section class="cta-banner" id="process">
-        <h2 contenteditable="true" data-eid="feat-eyebrow-2">Quality workmanship. Honest pricing. Your satisfaction guaranteed.</h2>
-        <a href="#contact" class="btn btn-outline-light" contenteditable="true" data-eid="cta-btn">Call (214) 916-6859</a>
+        <h2 contenteditable="true" data-eid="feat-eyebrow-2"><%- contentByLang.en['feat-eyebrow-2'] %></h2>
+        <a href="#contact" class="btn btn-outline-light" contenteditable="true" data-eid="cta-btn"><%- contentByLang.en['cta-btn'] %></a>
       </section>
 
       <section class="blog-section" id="blog">
-        <h2 contenteditable="true" data-eid="card3-eyebrow">From Our Blog</h2>
-        <p contenteditable="true" data-eid="card3-text">Tips, advice, and insights on flooring installation, maintenance, and care from our experienced team.</p>
+        <h2 contenteditable="true" data-eid="card3-eyebrow"><%- contentByLang.en['card3-eyebrow'] %></h2>
+        <p contenteditable="true" data-eid="card3-text"><%- contentByLang.en['card3-text'] %></p>
         <div class="blog-grid">
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1566272726777-91f06285e3c9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 contenteditable="true" data-eid="card3-heading">Hardwood vs. Laminate: Which is Right for You?</h3>
-              <p contenteditable="true" data-eid="blog-card1-text">Compare the benefits of solid hardwood, engineered wood, and laminate flooring to find the best fit for your home and budget.</p>
+              <h3 contenteditable="true" data-eid="card3-heading"><%- contentByLang.en['card3-heading'] %></h3>
+              <p contenteditable="true" data-eid="blog-card1-text"><%- contentByLang.en['blog-card1-text'] %></p>
             </div>
           </article>
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1637858565635-ae027c4da77e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 contenteditable="true" data-eid="card1-heading">When to Refinish vs. Replace Your Hardwood Floors</h3>
-              <p contenteditable="true" data-eid="card1-text">Not sure whether your floors need refinishing or full replacement? Our guide breaks down the signs and costs of each option.</p>
+              <h3 contenteditable="true" data-eid="card1-heading"><%- contentByLang.en['card1-heading'] %></h3>
+              <p contenteditable="true" data-eid="card1-text"><%- contentByLang.en['card1-text'] %></p>
             </div>
           </article>
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 contenteditable="true" data-eid="card2-eyebrow">5 Tips for Maintaining Your Hardwood Floors</h3>
-              <p contenteditable="true" data-eid="blog-card3-text">Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.</p>
+              <h3 contenteditable="true" data-eid="card2-eyebrow"><%- contentByLang.en['card2-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="blog-card3-text"><%- contentByLang.en['blog-card3-text'] %></p>
             </div>
           </article>
         </div>
         <div class="blog-cta">
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="blog-cta">Get Free Estimate</a>
+          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="blog-cta"><%- contentByLang.en['blog-cta'] %></a>
         </div>
       </section>
 
       <section class="newsletter-section" id="contact">
-        <h3 contenteditable="true" data-eid="newsletter-eyebrow">Get a Free Estimate</h3>
+        <h3 contenteditable="true" data-eid="newsletter-eyebrow"><%- contentByLang.en['newsletter-eyebrow'] %></h3>
         <div class="newsletter-form">
           <input type="email" placeholder="Your Email Address" />
-          <button class="btn btn-dark" contenteditable="true" data-eid="newsletter-btn">Send Request</button>
+          <button class="btn btn-dark" contenteditable="true" data-eid="newsletter-btn"><%- contentByLang.en['newsletter-btn'] %></button>
         </div>
       </section>
     </main>
@@ -230,30 +278,30 @@
     <footer class="site-footer">
       <div class="site-footer__logo">
         <span class="mark">PM</span>
-        <h2 contenteditable="true" data-eid="footer-text">Promaster Floors</h2>
+        <h2 contenteditable="true" data-eid="footer-text"><%- contentByLang.en['footer-text'] %></h2>
       </div>
       <div class="site-footer__nav">
-        <a href="#about" contenteditable="true" data-eid="footer-nav-about">About</a>
-        <a href="#work" contenteditable="true" data-eid="footer-nav-services">Services</a>
-        <a href="#blog" contenteditable="true" data-eid="footer-nav-blog">Blog</a>
-        <a href="#contact" contenteditable="true" data-eid="footer-nav-estimate">Free Estimate</a>
+        <a href="#about" contenteditable="true" data-eid="footer-nav-about"><%- contentByLang.en['footer-nav-about'] %></a>
+        <a href="#work" contenteditable="true" data-eid="footer-nav-services"><%- contentByLang.en['footer-nav-services'] %></a>
+        <a href="#blog" contenteditable="true" data-eid="footer-nav-blog"><%- contentByLang.en['footer-nav-blog'] %></a>
+        <a href="#contact" contenteditable="true" data-eid="footer-nav-estimate"><%- contentByLang.en['footer-nav-estimate'] %></a>
       </div>
       <div class="site-footer__locations">
         <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc1-heading">Service Area</h4>
-          <p contenteditable="true" data-eid="footer-loc1-text">Dallas / Fort Worth<br />&amp; surrounding areas<br />Texas</p>
+          <h4 contenteditable="true" data-eid="footer-loc1-heading"><%- contentByLang.en['footer-loc1-heading'] %></h4>
+          <p contenteditable="true" data-eid="footer-loc1-text"><%- contentByLang.en['footer-loc1-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc2-heading">Contact</h4>
-          <p contenteditable="true" data-eid="footer-loc2-text">Phone: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217</p>
+          <h4 contenteditable="true" data-eid="footer-loc2-heading"><%- contentByLang.en['footer-loc2-heading'] %></h4>
+          <p contenteditable="true" data-eid="footer-loc2-text"><%- contentByLang.en['footer-loc2-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc3-heading">Hours</h4>
-          <p contenteditable="true" data-eid="footer-loc3-text">Open 7 days a week<br />Free estimates<br />Call anytime</p>
+          <h4 contenteditable="true" data-eid="footer-loc3-heading"><%- contentByLang.en['footer-loc3-heading'] %></h4>
+          <p contenteditable="true" data-eid="footer-loc3-text"><%- contentByLang.en['footer-loc3-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc4-heading">Info</h4>
-          <p contenteditable="true" data-eid="footer-loc4-text">Se habla espanol<br />Veteran owned<br />Licensed &amp; insured</p>
+          <h4 contenteditable="true" data-eid="footer-loc4-heading"><%- contentByLang.en['footer-loc4-heading'] %></h4>
+          <p contenteditable="true" data-eid="footer-loc4-text"><%- contentByLang.en['footer-loc4-text'] %></p>
         </div>
       </div>
       <div class="site-footer__bottom">
@@ -261,81 +309,165 @@
           <a href="#" target="_blank" aria-label="Facebook">FB</a>
           <a href="#" target="_blank" aria-label="Instagram">IG</a>
         </div>
-        <small contenteditable="true" data-eid="footer-copyright">&copy; <%= new Date().getFullYear() %> Promaster Floors</small>
+        <small contenteditable="true" data-eid="footer-copyright"><%- contentByLang.en['footer-copyright'] %></small>
       </div>
     </footer>
 
     <script>
-      (function () {
-        var saveBtn = document.getElementById("save-btn");
-        var statusEl = document.getElementById("edit-status");
-        var pending = false;
+      var ALL_CONTENT = <%- JSON.stringify(content) %>;
+      var edits = { en: {}, es: {} };
+      var dirtyEn = {};
+      var dirtyEs = {};
+      for (var key in ALL_CONTENT) {
+        edits.en[key] = ALL_CONTENT[key].en || "";
+        edits.es[key] = ALL_CONTENT[key].es || "";
+      }
+      var activeLang = "en";
 
-        function collectEdits() {
-          var els = document.querySelectorAll("[data-eid]");
-          var edits = {};
-          for (var i = 0; i < els.length; i++) {
-            var el = els[i];
-            var id = el.getAttribute("data-eid");
-            edits[id] = el.innerHTML;
+      var translateTimers = {};
+      var langAtEdit = {};
+
+      var els = document.querySelectorAll("[data-eid]");
+      var eidToEl = {};
+      for (var i = 0; i < els.length; i++) {
+        var el = els[i];
+        var eid = el.getAttribute("data-eid");
+        eidToEl[eid] = el;
+        el.addEventListener("input", function(e) {
+          var eid = this.getAttribute("data-eid");
+          edits[activeLang][eid] = this.innerHTML;
+          if (activeLang === "en") {
+            dirtyEn[eid] = true;
+          } else {
+            dirtyEs[eid] = true;
           }
-          return edits;
+          langAtEdit[eid] = activeLang;
+          if (translateTimers[eid]) clearTimeout(translateTimers[eid]);
+          translateTimers[eid] = setTimeout(function() {
+            var sourceLang = langAtEdit[eid];
+            if (sourceLang !== activeLang) return;
+            var targetLang = sourceLang === "en" ? "es" : "en";
+            var text = edits[sourceLang][eid];
+            if (!text || !text.trim()) return;
+            fetch("/api/translate", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ text: text, to: targetLang }),
+            })
+              .then(function (r) { return r.json(); })
+              .then(function (data) {
+                if (data.translation) {
+                  edits[targetLang][eid] = data.translation;
+                  setStatus("Auto Translated!");
+                  setTimeout(function () { setStatus(""); }, 2000);
+                }
+              })
+              .catch(function () {});
+          }, 800);
+        });
+      }
+
+      function applyLang(lang) {
+        activeLang = lang;
+        var isES = lang === "es";
+        for (var eid in edits[lang]) {
+          if (eidToEl[eid]) {
+            eidToEl[eid].innerHTML = edits[lang][eid];
+          }
         }
-
-        function setStatus(msg, isError) {
-          statusEl.textContent = msg;
-          statusEl.style.color = isError ? "#ff6b6b" : "rgba(255,255,255,0.5)";
+        for (var j = 0; j < els.length; j++) {
+          els[j].classList.toggle("editing-es", isES);
         }
+        document.getElementById("lang-display").textContent = isES ? "Editing: Spanish" : "Editing: English";
+        document.getElementById("lang-dot").className = "dot " + lang;
+        document.getElementById("lang-en-btn").classList.toggle("active", !isES);
+        document.getElementById("lang-es-btn").classList.toggle("active", isES);
+      }
 
-        saveBtn.addEventListener("click", function () {
-          if (pending) return;
-          pending = true;
-          saveBtn.textContent = "Saving...";
-          saveBtn.disabled = true;
-          setStatus("");
+      document.getElementById("lang-en-btn").addEventListener("click", function() { applyLang("en"); });
+      document.getElementById("lang-es-btn").addEventListener("click", function() { applyLang("es"); });
 
-          var edits = collectEdits();
+      var saveBtn = document.getElementById("save-btn");
+      var statusEl = document.getElementById("edit-status");
+      var pending = false;
 
-          fetch("/api/save", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ edits: edits }),
+      function setStatus(msg, isError) {
+        statusEl.textContent = msg;
+        statusEl.style.color = isError ? "#ff6b6b" : "rgba(255,255,255,0.5)";
+      }
+
+      function updateEditsFromTranslations(translations) {
+        for (var key in translations) {
+          if (translations[key].es) {
+            edits.es[key] = translations[key].es;
+          }
+          if (translations[key].en) {
+            edits.en[key] = translations[key].en;
+          }
+        }
+      }
+
+      document.getElementById("restore-btn").addEventListener("click", function () {
+        if (confirm("Discard all unsaved changes and revert to last save?")) {
+          location.reload();
+        }
+      });
+
+      saveBtn.addEventListener("click", function () {
+        if (pending) return;
+        pending = true;
+        saveBtn.textContent = "Saving...";
+        saveBtn.disabled = true;
+        setStatus("");
+
+        fetch("/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ en: edits.en, es: edits.es, dirtyEn: dirtyEn, dirtyEs: dirtyEs }),
+        })
+          .then(function (r) {
+            if (!r.ok) throw new Error("Server error");
+            return r.json();
           })
-            .then(function (r) {
-              if (!r.ok) throw new Error("Server error");
-              return r.json();
-            })
-            .then(function (data) {
-              if (data.success) {
-                setStatus("Saved!");
-                saveBtn.textContent = "Saved";
-                saveBtn.classList.add("edit-btn-saved");
-                setTimeout(function () {
-                  saveBtn.textContent = "Save Changes";
-                  saveBtn.classList.remove("edit-btn-saved");
-                  setStatus("");
-                }, 2000);
-              } else {
-                throw new Error(data.error || "Unknown error");
-              }
-            })
-            .catch(function (err) {
-              setStatus("Error: " + err.message, true);
-              saveBtn.textContent = "Save Changes";
-            })
-            .finally(function () {
-              pending = false;
-              saveBtn.disabled = false;
-            });
-        });
+          .then(function (data) {
+            if (data.success) {
+              updateEditsFromTranslations(data.translations || {});
+              dirtyEn = {};
+              dirtyEs = {};
+              setStatus("Saved!");
+              saveBtn.textContent = "Saved";
+              saveBtn.classList.add("edit-btn-saved");
+              setTimeout(function () {
+                saveBtn.textContent = "Save Changes";
+                saveBtn.classList.remove("edit-btn-saved");
+                setStatus("");
+              }, 2000);
+            } else {
+              throw new Error(data.error || "Unknown error");
+            }
+          })
+          .catch(function (err) {
+            setStatus("Error: " + err.message, true);
+            saveBtn.textContent = "Save Changes";
+          })
+          .finally(function () {
+            pending = false;
+            saveBtn.disabled = false;
+          });
+      });
 
-        document.addEventListener("keydown", function (e) {
-          if ((e.ctrlKey || e.metaKey) && e.key === "s") {
-            e.preventDefault();
-            saveBtn.click();
-          }
-        });
-      })();
+      document.getElementById("restore-btn").addEventListener("click", function () {
+        if (confirm("Discard all unsaved changes and revert to last save?")) {
+          location.reload();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+          e.preventDefault();
+          saveBtn.click();
+        }
+      });
     </script>
   </body>
 </html>

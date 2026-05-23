@@ -1,0 +1,210 @@
+{
+  "brand-name": {
+    "en": "Promaster Flooring",
+    "es": "Pisos Promaster"
+  },
+  "nav-about": {
+    "en": "About Us",
+    "es": "Acerca de"
+  },
+  "nav-services": {
+    "en": "Services",
+    "es": "Servicios"
+  },
+  "nav-whyus": {
+    "en": "Why are we number 1?",
+    "es": "¿Por qué somos el número dos?"
+  },
+  "nav-blog": {
+    "en": "Blog",
+    "es": "Blog"
+  },
+  "nav-reviews": {
+    "en": "Reviews",
+    "es": "Reseñas "
+  },
+  "nav-contact": {
+    "en": "Contact Us",
+    "es": "Contáctanos"
+  },
+  "hero-heading": {
+    "en": "Expert Flooring Services in Dallas / Fort Worth",
+    "es": "Servicios expertos en pisos en Dallas / Fort Worth"
+  },
+  "hero-text": {
+    "en": "We use our years of experience and knowledge to complete your project perfectly. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.",
+    "es": "Utilizamos nuestros años de experiencia y experiencia para completar su proyecto a la perfección. El servicio al cliente y la honestidad son los aspectos más importantes de nuestro negocio, y su satisfacción está garantizada."
+  },
+  "hero-cta": {
+    "en": "Get a Free Quote ",
+    "es": "Consigue un presupuesto gratuito"
+  },
+  "feat-eyebrow-1": {
+    "en": "About Promaster Floors",
+    "es": "Acerca de Promaster Floors"
+  },
+  "feat-text-1": {
+    "en": "Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.",
+    "es": "Promaster Floors está comprometido con la excelencia en cada aspecto de nuestro negocio. Mantenemos un estándar de integridad basado en la justicia, la honestidad y la responsabilidad personal. Nuestra distinción es la calidad del servicio que brindamos a nuestros clientes. El conocimiento preciso de nuestro oficio, combinado con más de 10 años de experiencia, es lo que nos hace verdaderos profesionales. Sobre todo, estamos atentos a los intereses de nuestros clientes y hacemos de sus inquietudes la base de nuestro negocio. Tratamos cada hogar con sumo cuidado. <strong>Se habla español.</strong> Propiedad de veteranos y operado por veteranos."
+  },
+  "work-heading": {
+    "en": "Our Services",
+    "es": "Nuestros Servicios"
+  },
+  "work-subtitle": {
+    "en": "From wood installation to refinement and repairs, we offer quality craftsmanship on every project.",
+    "es": "Desde la instalación de madera dura hasta el reacabado y las reparaciones, aportamos artesanía de calidad a cada proyecto."
+  },
+  "svc1-eyebrow": {
+    "en": "Main girder",
+    "es": "Pisos de madera dura"
+  },
+  "svc1-text": {
+    "en": "Expert installation of solid wood floors and engineering. We work with premium materials to deliver beautiful and long-lasting results for your home or business.",
+    "es": "Instalación experta de madera maciza y suelos de ingeniería. Trabajamos con materiales de primera calidad para ofrecer resultados hermosos y duraderos para su hogar o negocio."
+  },
+  "svc2-eyebrow": {
+    "en": "Refinement of wooden floors",
+    "es": "Reacabado de suelos de madera"
+  },
+  "svc2-text": {
+    "en": "Bring your old floors back to life with our professional refining services. Sanding, dyeing and sealing to restore the natural beauty of your hardwood floors.",
+    "es": "Devuelva la vida a sus pisos antiguos con nuestros servicios profesionales de reacabado. Lijado, manchado y sellado para restaurar la belleza natural de sus suelos de madera dura."
+  },
+  "svc3-eyebrow": {
+    "en": "Laminate and vinyl",
+    "es": "Laminado y vinilo"
+  },
+  "svc3-text": {
+    "en": "Installation of high quality laminate and vinyl floors. Waterproof options, durable finishes and styles that mimic natural materials at affordable prices.",
+    "es": "Instalación de suelos laminados y vinílicos de alta calidad. Opciones impermeables, acabados duraderos y estilos que imitan los materiales naturales a precios asequibles."
+  },
+  "svc-eyebrow": {
+    "en": "Soil remediation.",
+    "es": "Reparación de suelos."
+  },
+  "svc-copy": {
+    "en": "Partial or complete repairs of damaged wood, laminate and vinyl floors. We repair misshapen boards, scratches, spaces, and more to make your floors look like new.",
+    "es": "Reparaciones parciales o totales de suelos de madera dura, laminados y vinílicos dañados. Arreglamos tablas deformadas, arañazos, huecos y más para que sus pisos se vean como nuevos."
+  },
+  "work-cta": {
+    "en": "Request a quote",
+    "es": "Solicitar presupuesto"
+  },
+  "feat-eyebrow-2": {
+    "en": "Quality work. Honest prices. Your satisfaction guaranteed.",
+    "es": "Mano de obra de calidad. Precios honestos. Su satisfacción garantizada."
+  },
+  "cta-btn": {
+    "en": "Call (214) 916-6859",
+    "es": "Llame al (214) 916-6859"
+  },
+  "reviews-heading": {
+    "en": "What our customers say",
+    "es": "Lo que dicen nuestros clientes"
+  },
+  "reviews-subtitle": {
+    "en": "See why homeowners rely on Promaster Floors for their flooring needs.",
+    "es": "Vea por qué los propietarios confían en Promaster Floors para sus necesidades de pisos."
+  },
+  "card3-eyebrow": {
+    "en": "From Our Blog",
+    "es": "De nuestro blog"
+  },
+  "card3-text": {
+    "en": "Tips, suggestions and information on floor installation, maintenance and care from our experienced team.",
+    "es": "Consejos, sugerencias y conocimientos sobre la instalación, mantenimiento y cuidado de los suelos de nuestro experimentado equipo."
+  },
+  "card3-heading": {
+    "en": "Wood vs. Laminate: Which is right for you?",
+    "es": "Madera dura vs. Laminado: ¿Cuál es el adecuado para usted?"
+  },
+  "blog-card1-text": {
+    "en": "Compare the benefits of solid wood, engineered wood, and laminate to find the one that best fits your home and budget.",
+    "es": "Compare los beneficios de la madera maciza, la madera de ingeniería y los pisos laminados para encontrar el que mejor se adapte a su hogar y presupuesto."
+  },
+  "card1-heading": {
+    "en": "When to refinance or replace your hardwood floors?",
+    "es": "Cuándo Reacabarlo vs. Reemplazar sus pisos de madera maciza"
+  },
+  "card1-text": {
+    "en": "Not sure if your floors need refinement or complete replacement? Our guide breaks down the signals and costs for each option.",
+    "es": "¿No está seguro de si sus pisos necesitan un nuevo acabado o un reemplazo completo? Nuestra guía desglosa los signos y los costes de cada opción."
+  },
+  "card2-eyebrow": {
+    "en": "5 tips for maintaining your hardwood floors",
+    "es": "5 consejos para mantener los suelos de madera maciza"
+  },
+  "blog-card3-text": {
+    "en": "Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.",
+    "es": "Mantenga sus suelos de madera con un aspecto bonito durante años con estos sencillos consejos de mantenimiento de nuestro experimentado equipo."
+  },
+  "blog-cta": {
+    "en": "Get Free Quote",
+    "es": "Consigue un presupuesto gratuito"
+  },
+  "newsletter-eyebrow": {
+    "en": "Get a Free Quote ",
+    "es": "Consigue un presupuesto gratuito"
+  },
+  "newsletter-btn": {
+    "en": "Next: Submit Application",
+    "es": "Enviar solicitud"
+  },
+  "footer-text": {
+    "en": "Promaster Flooring",
+    "es": "Pisos Promaster"
+  },
+  "footer-nav-about": {
+    "en": "About Us",
+    "es": "Acerca de"
+  },
+  "footer-nav-services": {
+    "en": "Services",
+    "es": "Servicios"
+  },
+  "footer-nav-blog": {
+    "en": "Blog",
+    "es": "Blog"
+  },
+  "footer-nav-estimate": {
+    "en": "Get a Free Quote ",
+    "es": "Free estimate."
+  },
+  "footer-loc1-heading": {
+    "en": "Service Area",
+    "es": "Área de Servicio"
+  },
+  "footer-loc1-text": {
+    "en": "Dallas / Fort worth<br />and surrounding<br />Texas",
+    "es": "Dallas / Fort Worth<br />y sus alrededores<br />Texas"
+  },
+  "footer-loc2-heading": {
+    "en": "Contact Information",
+    "es": "Información de contacto"
+  },
+  "footer-loc2-text": {
+    "en": "Phone: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217",
+    "es": "Teléfono: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217"
+  },
+  "footer-loc3-heading": {
+    "en": "Hours",
+    "es": "Horario"
+  },
+  "footer-loc3-text": {
+    "en": "Open 7 days a week<br />Free quotes<br />Call anytime",
+    "es": "Abierto los 7 días de la semana<br />Presupuestos gratuitos<br />Llame en cualquier momento"
+  },
+  "footer-loc4-heading": {
+    "en": "Information",
+    "es": "Información"
+  },
+  "footer-loc4-text": {
+    "en": "Spanish is spoken<br />Veterans Owned<br />Licensed and Insured",
+    "es": "Se habla español<br />Veteranos Titularidad<br />Licenciados y Asegurados"
+  },
+  "footer-copyright": {
+    "en": "© Promaster Floors",
+    "es": "© Promaster Floors"
+  }
+}

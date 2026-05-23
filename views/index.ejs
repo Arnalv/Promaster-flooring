@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= lang %>">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,15 +13,20 @@
     <header class="site-header" id="site-header">
       <a href="/" class="site-header__logo">
         <span class="mark">PM</span>
-        <h1 data-eid="brand-name">Promaster Floors</h1>
+        <h1 data-eid="brand-name"><%- contentByLang[lang]['brand-name'] %></h1>
       </a>
       <ul class="site-header__nav">
-        <li><a href="#about" data-eid="nav-about">About</a></li>
-        <li><a href="#work" data-eid="nav-services">Services</a></li>
-        <li><a href="#process" data-eid="nav-whyus">Why Us</a></li>
-         <li><a href="#blog" data-eid="nav-blog">Blog</a></li>
-         <li><a href="#reviews" data-eid="nav-reviews">Reviews</a></li>
-         <li><a href="#contact" class="nav-cta" data-eid="nav-contact">Contact Us</a></li>
+        <li><a href="#about" data-eid="nav-about"><%- contentByLang[lang]['nav-about'] %></a></li>
+        <li><a href="#work" data-eid="nav-services"><%- contentByLang[lang]['nav-services'] %></a></li>
+        <li><a href="#process" data-eid="nav-whyus"><%- contentByLang[lang]['nav-whyus'] %></a></li>
+        <li><a href="#blog" data-eid="nav-blog"><%- contentByLang[lang]['nav-blog'] %></a></li>
+        <li><a href="#reviews" data-eid="nav-reviews"><%- contentByLang[lang]['nav-reviews'] %></a></li>
+        <li><a href="#contact" class="nav-cta" data-eid="nav-contact"><%- contentByLang[lang]['nav-contact'] %></a></li>
+        <li class="lang-toggle-container">
+          <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
+            <span id="lang-label"><%= lang === 'en' ? 'ES' : 'EN' %></span>
+          </button>
+        </li>
       </ul>
     </header>
 
@@ -30,106 +35,106 @@
         <div class="hero__bg" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
         <div class="hero__shadow"></div>
         <div class="hero__content">
-          <h1 data-eid="hero-heading">Expert Flooring Services in Dallas / Fort Worth</h1>
-          <p data-eid="hero-text">We use our years of experience and expertise to complete your project with perfection. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.</p>
-          <a href="#contact" class="btn btn-dark" data-eid="hero-cta">Get a Free Estimate</a>
+          <h1 data-eid="hero-heading"><%- contentByLang[lang]['hero-heading'] %></h1>
+          <p data-eid="hero-text"><%- contentByLang[lang]['hero-text'] %></p>
+          <a href="#contact" class="btn btn-dark" data-eid="hero-cta"><%- contentByLang[lang]['hero-cta'] %></a>
         </div>
       </section>
 
       <section class="top-workplaces" id="about">
-        <h2 data-eid="feat-eyebrow-1">About Promaster Floors</h2>
-        <p data-eid="feat-text-1">Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.</p>
+        <h2 data-eid="feat-eyebrow-1"><%- contentByLang[lang]['feat-eyebrow-1'] %></h2>
+        <p data-eid="feat-text-1"><%- contentByLang[lang]['feat-text-1'] %></p>
       </section>
 
       <section class="work-section" id="work">
         <div class="work__head">
-          <h2 data-eid="work-heading">Our Services</h2>
-          <p data-eid="work-subtitle">From hardwood installation to refinishing and repairs, we bring quality craftsmanship to every project.</p>
+          <h2 data-eid="work-heading"><%- contentByLang[lang]['work-heading'] %></h2>
+          <p data-eid="work-subtitle"><%- contentByLang[lang]['work-subtitle'] %></p>
         </div>
         <div class="work-grid">
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 data-eid="svc1-eyebrow">Hardwood Flooring</h3>
-              <p data-eid="svc1-text">Expert installation of solid and engineered hardwood flooring. We work with premium materials to deliver beautiful, long-lasting results for your home or business.</p>
+              <h3 data-eid="svc1-eyebrow"><%- contentByLang[lang]['svc1-eyebrow'] %></h3>
+              <p data-eid="svc1-text"><%- contentByLang[lang]['svc1-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 data-eid="svc2-eyebrow">Wood Floor Refinishing</h3>
-              <p data-eid="svc2-text">Bring your old floors back to life with our professional refinishing services. Sanding, staining, and sealing to restore the natural beauty of your hardwood floors.</p>
+              <h3 data-eid="svc2-eyebrow"><%- contentByLang[lang]['svc2-eyebrow'] %></h3>
+              <p data-eid="svc2-text"><%- contentByLang[lang]['svc2-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 data-eid="svc3-eyebrow">Laminate &amp; Vinyl</h3>
-              <p data-eid="svc3-text">High-quality laminate and vinyl flooring installation. Waterproof options, durable finishes, and styles that mimic natural materials at affordable prices.</p>
+              <h3 data-eid="svc3-eyebrow"><%- contentByLang[lang]['svc3-eyebrow'] %></h3>
+              <p data-eid="svc3-text"><%- contentByLang[lang]['svc3-text'] %></p>
             </div>
           </div>
           <div class="work-card">
             <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="work-card__overlay">
-              <h3 data-eid="svc-eyebrow">Floor Repair</h3>
-              <p data-eid="svc-copy">Partial or full-floor repairs for damaged hardwood, laminate, and vinyl flooring. We fix warped boards, scratches, gaps, and more to make your floors look like new.</p>
+              <h3 data-eid="svc-eyebrow"><%- contentByLang[lang]['svc-eyebrow'] %></h3>
+              <p data-eid="svc-copy"><%- contentByLang[lang]['svc-copy'] %></p>
             </div>
           </div>
         </div>
         <div class="work-cta">
-          <a href="#contact" class="btn btn-dark" data-eid="work-cta">Request a Quote</a>
+          <a href="#contact" class="btn btn-dark" data-eid="work-cta"><%- contentByLang[lang]['work-cta'] %></a>
         </div>
       </section>
 
       <section class="cta-banner" id="process">
-        <h2 data-eid="feat-eyebrow-2">Quality workmanship. Honest pricing. Your satisfaction guaranteed.</h2>
-        <a href="#contact" class="btn btn-outline-light" data-eid="cta-btn">Call (214) 916-6859</a>
+        <h2 data-eid="feat-eyebrow-2"><%- contentByLang[lang]['feat-eyebrow-2'] %></h2>
+        <a href="#contact" class="btn btn-outline-light" data-eid="cta-btn"><%- contentByLang[lang]['cta-btn'] %></a>
       </section>
 
       <section class="reviews-section" id="reviews">
-        <h2 data-eid="reviews-heading">What Our Customers Say</h2>
-        <p data-eid="reviews-subtitle">See why homeowners trust Promaster Floors for their flooring needs.</p>
+        <h2 data-eid="reviews-heading"><%- contentByLang[lang]['reviews-heading'] %></h2>
+        <p data-eid="reviews-subtitle"><%- contentByLang[lang]['reviews-subtitle'] %></p>
         <div class="reviews-container">
           <iframe src="https://sites-api.arnalv.net/" class="reviews-iframe" title="Angi Reviews Widget"></iframe>
         </div>
       </section>
 
       <section class="blog-section" id="blog">
-        <h2 data-eid="card3-eyebrow">From Our Blog</h2>
-        <p data-eid="card3-text">Tips, advice, and insights on flooring installation, maintenance, and care from our experienced team.</p>
+        <h2 data-eid="card3-eyebrow"><%- contentByLang[lang]['card3-eyebrow'] %></h2>
+        <p data-eid="card3-text"><%- contentByLang[lang]['card3-text'] %></p>
         <div class="blog-grid">
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1566272726777-91f06285e3c9?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 data-eid="card3-heading">Hardwood vs. Laminate: Which is Right for You?</h3>
-              <p data-eid="blog-card1-text">Compare the benefits of solid hardwood, engineered wood, and laminate flooring to find the best fit for your home and budget.</p>
+              <h3 data-eid="card3-heading"><%- contentByLang[lang]['card3-heading'] %></h3>
+              <p data-eid="blog-card1-text"><%- contentByLang[lang]['blog-card1-text'] %></p>
             </div>
           </article>
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1637858565635-ae027c4da77e?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 data-eid="card1-heading">When to Refinish vs. Replace Your Hardwood Floors</h3>
-              <p data-eid="card1-text">Not sure whether your floors need refinishing or full replacement? Our guide breaks down the signs and costs of each option.</p>
+              <h3 data-eid="card1-heading"><%- contentByLang[lang]['card1-heading'] %></h3>
+              <p data-eid="card1-text"><%- contentByLang[lang]['card1-text'] %></p>
             </div>
           </article>
           <article class="blog-card">
             <div class="blog-card__image" style="background-image: url('https://images.unsplash.com/photo-1613621792067-8e28d16b735c?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
             <div class="blog-card__body">
-              <h3 data-eid="card2-eyebrow">5 Tips for Maintaining Your Hardwood Floors</h3>
-              <p data-eid="blog-card3-text">Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.</p>
+              <h3 data-eid="card2-eyebrow"><%- contentByLang[lang]['card2-eyebrow'] %></h3>
+              <p data-eid="blog-card3-text"><%- contentByLang[lang]['blog-card3-text'] %></p>
             </div>
           </article>
         </div>
         <div class="blog-cta">
-          <a href="#contact" class="btn btn-dark" data-eid="blog-cta">Get Free Estimate</a>
+          <a href="#contact" class="btn btn-dark" data-eid="blog-cta"><%- contentByLang[lang]['blog-cta'] %></a>
         </div>
       </section>
 
       <section class="newsletter-section" id="contact">
-        <h3 data-eid="newsletter-eyebrow">Get a Free Estimate</h3>
+        <h3 data-eid="newsletter-eyebrow"><%- contentByLang[lang]['newsletter-eyebrow'] %></h3>
         <div class="newsletter-form">
           <input type="email" placeholder="Your Email Address" />
-          <button class="btn btn-dark" data-eid="newsletter-btn">Send Request</button>
+          <button class="btn btn-dark" data-eid="newsletter-btn"><%- contentByLang[lang]['newsletter-btn'] %></button>
         </div>
       </section>
     </main>
@@ -137,30 +142,30 @@
     <footer class="site-footer">
       <div class="site-footer__logo">
         <span class="mark">PM</span>
-        <h2 data-eid="footer-text">Promaster Floors</h2>
+        <h2 data-eid="footer-text"><%- contentByLang[lang]['footer-text'] %></h2>
       </div>
       <div class="site-footer__nav">
-        <a href="#about" data-eid="footer-nav-about">About</a>
-        <a href="#work" data-eid="footer-nav-services">Services</a>
-        <a href="#blog" data-eid="footer-nav-blog">Blog</a>
-        <a href="#contact" data-eid="footer-nav-estimate">Free Estimate</a>
+        <a href="#about" data-eid="footer-nav-about"><%- contentByLang[lang]['footer-nav-about'] %></a>
+        <a href="#work" data-eid="footer-nav-services"><%- contentByLang[lang]['footer-nav-services'] %></a>
+        <a href="#blog" data-eid="footer-nav-blog"><%- contentByLang[lang]['footer-nav-blog'] %></a>
+        <a href="#contact" data-eid="footer-nav-estimate"><%- contentByLang[lang]['footer-nav-estimate'] %></a>
       </div>
       <div class="site-footer__locations">
         <div class="footer-location">
-          <h4 data-eid="footer-loc1-heading">Service Area</h4>
-          <p data-eid="footer-loc1-text">Dallas / Fort Worth<br />&amp; surrounding areas<br />Texas</p>
+          <h4 data-eid="footer-loc1-heading"><%- contentByLang[lang]['footer-loc1-heading'] %></h4>
+          <p data-eid="footer-loc1-text"><%- contentByLang[lang]['footer-loc1-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 data-eid="footer-loc2-heading">Contact</h4>
-          <p data-eid="footer-loc2-text">Phone: (214) 916-6859<br />PO Box 562<br />Dallas, TX 75217</p>
+          <h4 data-eid="footer-loc2-heading"><%- contentByLang[lang]['footer-loc2-heading'] %></h4>
+          <p data-eid="footer-loc2-text"><%- contentByLang[lang]['footer-loc2-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 data-eid="footer-loc3-heading">Hours</h4>
-          <p data-eid="footer-loc3-text">Open 7 days a week<br />Free estimates<br />Call anytime</p>
+          <h4 data-eid="footer-loc3-heading"><%- contentByLang[lang]['footer-loc3-heading'] %></h4>
+          <p data-eid="footer-loc3-text"><%- contentByLang[lang]['footer-loc3-text'] %></p>
         </div>
         <div class="footer-location">
-          <h4 data-eid="footer-loc4-heading">Info</h4>
-          <p data-eid="footer-loc4-text">Se habla espanol<br />Veteran owned<br />Licensed &amp; insured</p>
+          <h4 data-eid="footer-loc4-heading"><%- contentByLang[lang]['footer-loc4-heading'] %></h4>
+          <p data-eid="footer-loc4-text"><%- contentByLang[lang]['footer-loc4-text'] %></p>
         </div>
       </div>
       <div class="site-footer__bottom">
@@ -168,11 +173,46 @@
           <a href="#" target="_blank" aria-label="Facebook">FB</a>
           <a href="#" target="_blank" aria-label="Instagram">IG</a>
         </div>
-        <small data-eid="footer-copyright">&copy; <%= new Date().getFullYear() %> Promaster Floors</small>
+        <small data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
       </div>
     </footer>
 
     <script>
+      var ALL_CONTENT = <%- JSON.stringify(content) %>;
+      var currentLang = '<%= lang %>';
+
+      function switchLang(lang) {
+        currentLang = lang;
+        var els = document.querySelectorAll("[data-eid]");
+        for (var i = 0; i < els.length; i++) {
+          var el = els[i];
+          var eid = el.getAttribute("data-eid");
+          if (ALL_CONTENT[eid] && ALL_CONTENT[eid][lang]) {
+            el.innerHTML = ALL_CONTENT[eid][lang];
+          }
+        }
+        document.documentElement.lang = lang;
+        var label = document.getElementById("lang-label");
+        if (label) label.textContent = lang === 'en' ? 'ES' : 'EN';
+        try { localStorage.setItem("pref-lang", lang); } catch(e) {}
+      }
+
+      var toggleBtn = document.getElementById("lang-toggle");
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", function () {
+          switchLang(currentLang === 'en' ? 'es' : 'en');
+        });
+      }
+
+      (function() {
+        try {
+          var saved = localStorage.getItem("pref-lang");
+          if (saved && saved !== currentLang) {
+            switchLang(saved);
+          }
+        } catch(e) {}
+      })();
+
       (function() {
         var header = document.getElementById("site-header");
         var ticking = false;
