@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy — Promaster Floors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      .privacy-page {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 12rem 6.25vw 6rem;
+        background: #fff;
+        min-height: 100vh;
+      }
+      .privacy-page h1 {
+        font-size: 3rem;
+        font-weight: 300;
+        color: #cc092f;
+        margin: 0 0 0.5rem;
+      }
+      .privacy-page .last-updated {
+        font-size: 1.3rem;
+        color: #999;
+        margin-bottom: 3rem;
+      }
+      .privacy-page .policy-content {
+        font-size: 1.5rem;
+        line-height: 2.6rem;
+        color: #333;
+        white-space: pre-wrap;
+        font-family: 'Lato', ui-sans-serif, system-ui, sans-serif;
+      }
+      .privacy-page .back-link {
+        display: inline-block;
+        margin-top: 3rem;
+        color: #cc092f;
+        font-size: 1.4rem;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header scrolled" id="site-header">
+      <a href="/" class="site-header__logo">
+        <span class="mark">PM</span>
+        <h1>Promaster Flooring</h1>
+      </a>
+    </header>
+    <main class="privacy-page">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last updated: May 23, 2026</p>
+      <div class="policy-content"><%= policyText %></div>
+      <a href="/" class="back-link">&larr; Back to Home</a>
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer__bottom">
+        <small>&copy; Promaster Floors <%= new Date().getFullYear() %></small>
+      </div>
+    </footer>
+  </body>
+</html>
