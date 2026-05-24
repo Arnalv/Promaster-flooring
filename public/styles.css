@@ -687,8 +687,13 @@ button {
   padding: 1.5rem 6.25vw;
   font-size: 1.2rem;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
+  color: #fff;
   border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.footer-copyright a {
+  color: #fff;
+  text-decoration: underline;
 }
 
 /* ─── Gallery ─── */
@@ -1001,11 +1006,4 @@ button {
   color: #333;
 }
 
-#copyright-link {
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
 
-#copyright-link:hover {
-  opacity: 0.7;
-}

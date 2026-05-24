@@ -218,7 +218,7 @@
           </a>
         </div>
       </div>
-      <small class="footer-copyright" id="copyright-link" data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
+      <small class="footer-copyright" data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %> &nbsp;|&nbsp; <a href="#" id="privacy-link">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" id="terms-link">Terms &amp; Conditions</a></small>
     </footer>
 
     <div class="popup-overlay" id="popup-overlay">
@@ -378,24 +378,20 @@
       }
 
       (function() {
-        var copyright = document.getElementById("copyright-link");
         var overlay = document.getElementById("popup-overlay");
         var closeBtn = document.getElementById("popup-close");
         var body = document.getElementById("popup-body");
 
-        function openPopup() {
+        function openPopup(type) {
           overlay.classList.add("open");
           document.body.style.overflow = "hidden";
           body.innerHTML = "<p style='text-align:center;padding:3rem;color:#999;'>Loading...</p>";
-          Promise.all([
-            fetch("/privacy-policy.txt").then(function(r) { return r.text(); }),
-            fetch("/terms-of-service.txt").then(function(r) { return r.text(); })
-          ]).then(function(results) {
-            var policyText = results[0];
-            var termsText = results[1];
-            body.innerHTML = "<h2 style='color:#6B2FA0;margin-top:0;'>Privacy Policy</h2><div style='white-space:pre-wrap;font-family:inherit;font-size:1.3rem;line-height:2rem;color:#555;'>" + esc(policyText) + "</div><hr style='margin:2rem 0;border:none;border-top:1px solid #ddd;'><h2 style='color:#6B2FA0;'>Terms of Service</h2><div style='white-space:pre-wrap;font-family:inherit;font-size:1.3rem;line-height:2rem;color:#555;'>" + esc(termsText) + "</div>";
+          var url = type === "privacy" ? "/privacy-policy.txt" : "/terms-of-service.txt";
+          var title = type === "privacy" ? "Privacy Policy" : "Terms of Service";
+          fetch(url).then(function(r) { return r.text(); }).then(function(text) {
+            body.innerHTML = "<h2 style='color:#6B2FA0;margin-top:0;'>" + title + "</h2><div style='white-space:pre-wrap;font-family:inherit;font-size:1.3rem;line-height:2rem;color:#555;'>" + esc(text) + "</div>";
           }).catch(function() {
-            body.innerHTML = "<p style='text-align:center;color:red;padding:3rem;'>Failed to load documents.</p>";
+            body.innerHTML = "<p style='text-align:center;color:red;padding:3rem;'>Failed to load document.</p>";
           });
         }
 
@@ -404,7 +400,8 @@
           document.body.style.overflow = "";
         }
 
-        if (copyright) copyright.addEventListener("click", openPopup);
+        document.getElementById("privacy-link").addEventListener("click", function(e) { e.preventDefault(); openPopup("privacy"); });
+        document.getElementById("terms-link").addEventListener("click", function(e) { e.preventDefault(); openPopup("terms"); });
         if (closeBtn) closeBtn.addEventListener("click", closePopup);
         if (overlay) overlay.addEventListener("click", function(e) {
           if (e.target === overlay) closePopup();
