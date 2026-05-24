@@ -938,9 +938,14 @@ button {
     align-items: center;
     gap: 2rem;
   }
-  .site-header__nav.open a {
+  .site-header__nav.open a,
+  .site-header.scrolled .site-header__nav.open a {
     color: #fff;
     font-size: 2rem;
+  }
+  .site-header__nav.open li,
+  .site-header.scrolled .site-header__nav.open li {
+    color: #fff;
   }
   .site-header__nav.open .lang-toggle {
     border-color: rgba(255,255,255,0.4);
