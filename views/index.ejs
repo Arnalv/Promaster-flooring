@@ -217,12 +217,16 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
         </div>
-        <a href="/privacy" style="font-size:1.3rem;color:#464646;text-decoration:underline;">Privacy Policy</a>
-        <a href="/terms" style="font-size:1.3rem;color:#464646;text-decoration:underline;">Terms of Service</a>
-        <small data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
       </div>
-      <small class="footer-copyright" data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
+      <small class="footer-copyright" id="copyright-link" data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
     </footer>
+
+    <div class="popup-overlay" id="popup-overlay">
+      <div class="popup-content">
+        <button class="popup-close" id="popup-close" aria-label="Close">&times;</button>
+        <div id="popup-body"></div>
+      </div>
+    </div>
 
     <script>
       var ALL_CONTENT = <%- JSON.stringify(content) %>;
@@ -372,6 +376,51 @@
             });
         });
       }
+
+      (function() {
+        var copyright = document.getElementById("copyright-link");
+        var overlay = document.getElementById("popup-overlay");
+        var closeBtn = document.getElementById("popup-close");
+        var body = document.getElementById("popup-body");
+
+        function openPopup() {
+          overlay.classList.add("open");
+          document.body.style.overflow = "hidden";
+          body.innerHTML = "<p style='text-align:center;padding:3rem;color:#999;'>Loading...</p>";
+          Promise.all([
+            fetch("/privacy-policy.txt").then(function(r) { return r.text(); }),
+            fetch("/terms-of-service.txt").then(function(r) { return r.text(); })
+          ]).then(function(results) {
+            var policyText = results[0];
+            var termsText = results[1];
+            body.innerHTML = "<h2 style='color:#6B2FA0;margin-top:0;'>Privacy Policy</h2><div style='white-space:pre-wrap;font-family:inherit;font-size:1.3rem;line-height:2rem;color:#555;'>" + esc(policyText) + "</div><hr style='margin:2rem 0;border:none;border-top:1px solid #ddd;'><h2 style='color:#6B2FA0;'>Terms of Service</h2><div style='white-space:pre-wrap;font-family:inherit;font-size:1.3rem;line-height:2rem;color:#555;'>" + esc(termsText) + "</div>";
+          }).catch(function() {
+            body.innerHTML = "<p style='text-align:center;color:red;padding:3rem;'>Failed to load documents.</p>";
+          });
+        }
+
+        function closePopup() {
+          overlay.classList.remove("open");
+          document.body.style.overflow = "";
+        }
+
+        if (copyright) copyright.addEventListener("click", openPopup);
+        if (closeBtn) closeBtn.addEventListener("click", closePopup);
+        if (overlay) overlay.addEventListener("click", function(e) {
+          if (e.target === overlay) closePopup();
+        });
+        document.addEventListener("keydown", function(e) {
+          if (e.key === "Escape" && overlay && overlay.classList.contains("open")) {
+            closePopup();
+          }
+        });
+
+        function esc(str) {
+          var d = document.createElement("div");
+          d.appendChild(document.createTextNode(str));
+          return d.innerHTML;
+        }
+      })();
     </script>
   </body>
 </html>
