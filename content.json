@@ -12,8 +12,8 @@
     "es": "Servicios"
   },
   "nav-whyus": {
-    "en": "Why are we number 1?",
-    "es": "¿Por qué somos el número dos?"
+    "en": "Project Gallery",
+    "es": "Galería de Proyectos"
   },
   "nav-blog": {
     "en": "Blog",
@@ -28,12 +28,12 @@
     "es": "Contáctanos"
   },
   "hero-heading": {
-    "en": "Expert Flooring Services in Dallas / Fort Worth",
-    "es": "Servicios expertos en pisos en Dallas / Fort Worth"
+    "en": "Specialists in Residential and Commercial Remodelling; serving Dallas-Fort Worth Metroplex since 2015",
+    "es": "Especialistas en Remodelación Residencial y Comercial al servicio de Dallas-Fort Worth Metroplex desde 2015"
   },
   "hero-text": {
-    "en": "We use our years of experience and knowledge to complete your project perfectly. Customer service and honesty are the most important aspects of our business, and your satisfaction is guaranteed.",
-    "es": "Utilizamos nuestros años de experiencia y experiencia para completar su proyecto a la perfección. El servicio al cliente y la honestidad son los aspectos más importantes de nuestro negocio, y su satisfacción está garantizada."
+    "en": "",
+    "es": ""
   },
   "hero-cta": {
     "en": "Get a Free Quote ",
@@ -44,19 +44,19 @@
     "es": "Acerca de Promaster Floors"
   },
   "feat-text-1": {
-    "en": "Promaster Floors is committed to excellence in every aspect of our business. We uphold a standard of integrity bound by fairness, honesty, and personal responsibility. Our distinction is the quality of service we bring to our customers. Accurate knowledge of our trade, combined with over 10 years of experience, is what makes us true professionals. Above all, we are watchful of our customers' interests and make their concerns the basis of our business. We treat every home with intense care. <strong>Se habla espanol.</strong> Veteran owned and operated.",
-    "es": "Promaster Floors está comprometido con la excelencia en cada aspecto de nuestro negocio. Mantenemos un estándar de integridad basado en la justicia, la honestidad y la responsabilidad personal. Nuestra distinción es la calidad del servicio que brindamos a nuestros clientes. El conocimiento preciso de nuestro oficio, combinado con más de 10 años de experiencia, es lo que nos hace verdaderos profesionales. Sobre todo, estamos atentos a los intereses de nuestros clientes y hacemos de sus inquietudes la base de nuestro negocio. Tratamos cada hogar con sumo cuidado. <strong>Se habla español.</strong> Propiedad de veteranos y operado por veteranos."
+    "en": "Promaster Floors is a veteran-owned and operated flooring and remodeling company dedicated to delivering exceptional quality and outstanding customer service. With over 10 years of experience serving Dallas-Fort Worth Metroplex, we take pride in our craftsmanship, attention to detail, and honest approach to every project. Our commitment is simple: treat every home and business like our own. We combine expert knowledge with reliable service to provide solutions that are both beautiful and built to last. Whether it's a small repair or a full remodel, your satisfaction is our top priority.<br /><br /><strong>Se habla español.</strong> Give us a call today — we look forward to working with you!",
+    "es": "Promaster Floors es una empresa de pisos y remodelación propiedad de veteranos y operada por veteranos, dedicada a brindar calidad excepcional y un servicio al cliente sobresaliente. Con más de 10 años de experiencia sirviendo a Dallas-Fort Worth Metroplex, nos enorgullecemos de nuestra artesanía, atención al detalle y enfoque honesto en cada proyecto. Nuestro compromiso es simple: tratar cada hogar y negocio como si fuera nuestro. Combinamos conocimiento experto con servicio confiable para brindar soluciones hermosas y construidas para durar. Ya sea una reparación pequeña o una remodelación completa, su satisfacción es nuestra prioridad.<br /><br /><strong>Se habla español.</strong> ¡Llámenos hoy — esperamos trabajar con usted!"
   },
   "work-heading": {
     "en": "Our Services",
     "es": "Nuestros Servicios"
   },
   "work-subtitle": {
-    "en": "From wood installation to refinement and repairs, we offer quality craftsmanship on every project.",
-    "es": "Desde la instalación de madera dura hasta el reacabado y las reparaciones, aportamos artesanía de calidad a cada proyecto."
+    "en": "We specialize in high-quality flooring, tiling and concrete remodeling & engineering solutions for both residential and commercial properties.",
+    "es": "Nos especializamos en pisos de alta calidad, azulejos y soluciones de remodelación e ingeniería en concreto para propiedades residenciales y comerciales."
   },
   "svc1-eyebrow": {
-    "en": "Main girder",
+    "en": "Hardwood Flooring",
     "es": "Pisos de madera dura"
   },
   "svc1-text": {
@@ -64,28 +64,68 @@
     "es": "Instalación experta de madera maciza y suelos de ingeniería. Trabajamos con materiales de primera calidad para ofrecer resultados hermosos y duraderos para su hogar o negocio."
   },
   "svc2-eyebrow": {
-    "en": "Refinement of wooden floors",
-    "es": "Reacabado de suelos de madera"
+    "en": "Laminate and Vinyl Refinishing",
+    "es": "Reacabado de laminado y vinilo"
   },
   "svc2-text": {
-    "en": "Bring your old floors back to life with our professional refining services. Sanding, dyeing and sealing to restore the natural beauty of your hardwood floors.",
-    "es": "Devuelva la vida a sus pisos antiguos con nuestros servicios profesionales de reacabado. Lijado, manchado y sellado para restaurar la belleza natural de sus suelos de madera dura."
+    "en": "Expert sanding, staining and sealing to restore natural beauty. Also offering laminate, vinyl and linoleum installation, repair and replacement.",
+    "es": "Lijado, teñido y sellado experto para restaurar la belleza natural. También ofrecemos instalación, reparación y reemplazo de laminados, vinilos y linóleo para espacios residenciales y comerciales."
   },
   "svc3-eyebrow": {
-    "en": "Laminate and vinyl",
-    "es": "Laminado y vinilo"
+    "en": "Outdoor Remodeling",
+    "es": "Remodelación de exteriores"
   },
   "svc3-text": {
-    "en": "Installation of high quality laminate and vinyl floors. Waterproof options, durable finishes and styles that mimic natural materials at affordable prices.",
-    "es": "Instalación de suelos laminados y vinílicos de alta calidad. Opciones impermeables, acabados duraderos y estilos que imitan los materiales naturales a precios asequibles."
+    "en": "Exterior remodeling including concrete layouts, sidewalk construction, and outdoor living spaces. Durable finishes built to withstand Texas weather.",
+    "es": "Remodelación de exteriores que incluye diseños de concreto, construcción de aceras y espacios de vida al aire libre. Acabados duraderos construidos para resistir el clima de Texas."
   },
-  "svc-eyebrow": {
-    "en": "Soil remediation.",
-    "es": "Reparación de suelos."
+  "svc4-eyebrow": {
+    "en": "Patio Remodeling",
+    "es": "Remodelación de patios"
   },
-  "svc-copy": {
-    "en": "Partial or complete repairs of damaged wood, laminate and vinyl floors. We repair misshapen boards, scratches, spaces, and more to make your floors look like new.",
-    "es": "Reparaciones parciales o totales de suelos de madera dura, laminados y vinílicos dañados. Arreglamos tablas deformadas, arañazos, huecos y más para que sus pisos se vean como nuevos."
+  "svc4-text": {
+    "en": "Custom patio design and construction to extend your living space outdoors. Quality materials and professional craftsmanship for lasting results.",
+    "es": "Diseño y construcción de patios personalizados para extender su espacio de vida al aire libre. Materiales de calidad y artesanía profesional para resultados duraderos."
+  },
+  "svc5-eyebrow": {
+    "en": "Kitchen Remodeling",
+    "es": "Remodelación de cocinas"
+  },
+  "svc5-text": {
+    "en": "Full kitchen remodeling — from layout redesign to custom cabinetry, countertops, backsplash and finishes to build the kitchen you've always wanted.",
+    "es": "Remodelación completa de cocinas — desde el rediseño de la distribución hasta gabinetes personalizados, encimeras, salpicaderos y acabados. Trabajamos con usted para diseñar y construir la cocina que siempre ha deseado."
+  },
+  "svc6-eyebrow": {
+    "en": "Bathroom Remodeling",
+    "es": "Remodelación de baños"
+  },
+  "svc6-text": {
+    "en": "Complete bathroom renovations — from tile work and fixtures to vanities and lighting. We transform your space into a relaxing retreat.",
+    "es": "Renovaciones completas de baños — desde azulejos y accesorios hasta vanidades e iluminación. Transformamos su espacio en un retiro relajante."
+  },
+  "svc7-eyebrow": {
+    "en": "Fireplace Remodeling",
+    "es": "Remodelación de chimeneas"
+  },
+  "svc7-text": {
+    "en": "Custom fireplace design and renovation — from stone and tile surrounds to mantels and inserts. Transform your living space with a stunning focal point.",
+    "es": "Diseño y renovación personalizada de chimeneas, desde cercos de piedra y azulejo hasta repisas e insertos. Transforme su espacio vital con un punto focal impresionante."
+  },
+  "svc8-eyebrow": {
+    "en": "Staircase Remodeling",
+    "es": "Remodelación de escaleras"
+  },
+  "svc8-text": {
+    "en": "Staircase renovation including railing replacement, tread refinishing, and full structural updates. Enhance your home's flow and elegance from floor to floor.",
+    "es": "Renovación de escaleras que incluye reemplazo de barandales, reacabado de huellas y actualizaciones estructurales completas. Mejore el flujo y la elegancia de su hogar de piso a piso."
+  },
+  "gallery-heading": {
+    "en": "Project Gallery",
+    "es": "Galería de Proyectos"
+  },
+  "gallery-subtitle": {
+    "en": "Take a look at some of our recent work.",
+    "es": "Eche un vistazo a algunos de nuestros trabajos recientes."
   },
   "work-cta": {
     "en": "Request a quote",
@@ -123,6 +163,18 @@
     "en": "Compare the benefits of solid wood, engineered wood, and laminate to find the one that best fits your home and budget.",
     "es": "Compare los beneficios de la madera maciza, la madera de ingeniería y los pisos laminados para encontrar el que mejor se adapte a su hogar y presupuesto."
   },
+  "blog-card1-full": {
+    "en": "Solid hardwood offers timeless beauty and can be refinished multiple times, making it a lifelong investment. Engineered wood provides similar aesthetics with better stability in humid conditions. Laminate is budget-friendly, scratch-resistant, and easy to install — ideal for high-traffic areas and families with pets. Consider your budget, room usage, and desired longevity when choosing.",
+    "es": "La madera maciza ofrece una belleza atemporal y puede renovarse múltiples veces, lo que la convierte en una inversión de por vida. La madera de ingeniería proporciona una estética similar con mejor estabilidad en condiciones húmedas. El laminado es económico, resistente a los arañazos y fácil de instalar, ideal para áreas de alto tránsito y familias con mascotas."
+  },
+  "blog-card1-read": {
+    "en": "Read More",
+    "es": "Leer Más"
+  },
+  "blog-card1-less": {
+    "en": "Show Less",
+    "es": "Mostrar Menos"
+  },
   "card1-heading": {
     "en": "When to refinance or replace your hardwood floors?",
     "es": "Cuándo Reacabarlo vs. Reemplazar sus pisos de madera maciza"
@@ -130,6 +182,18 @@
   "card1-text": {
     "en": "Not sure if your floors need refinement or complete replacement? Our guide breaks down the signals and costs for each option.",
     "es": "¿No está seguro de si sus pisos necesitan un nuevo acabado o un reemplazo completo? Nuestra guía desglosa los signos y los costes de cada opción."
+  },
+  "card1-full": {
+    "en": "Refinishing works well when the wood is in good structural condition but the finish looks worn. It costs significantly less than replacement and restores the original beauty. Replacement is necessary when there's water damage, deep scratches, warping, or if the floor has been refinished too many times already. If your budget allows, replacement gives you a chance to change species, color, or style entirely.",
+    "es": "El reacabado funciona bien cuando la madera está en buenas condiciones estructurales pero el acabado se ve desgastado. Cuesta significativamente menos que el reemplazo y restaura la belleza original. El reemplazo es necesario cuando hay daños por agua, arañazos profundos, deformaciones o si el piso ya se ha renovado demasiadas veces."
+  },
+  "card1-read": {
+    "en": "Read More",
+    "es": "Leer Más"
+  },
+  "card1-less": {
+    "en": "Show Less",
+    "es": "Mostrar Menos"
   },
   "card2-eyebrow": {
     "en": "5 tips for maintaining your hardwood floors",
@@ -139,17 +203,29 @@
     "en": "Keep your hardwood floors looking beautiful for years with these simple maintenance tips from our experienced team.",
     "es": "Mantenga sus suelos de madera con un aspecto bonito durante años con estos sencillos consejos de mantenimiento de nuestro experimentado equipo."
   },
+  "blog-card3-full": {
+    "en": "1. Sweep or dust mop daily to remove grit that causes scratches. 2. Use felt pads under furniture legs and avoid walking with high heels. 3. Maintain indoor humidity between 35-55% to prevent wood from expanding or contracting. 4. Clean spills immediately — standing water is the enemy of hardwood. 5. Schedule professional refinishing every 5-7 years to keep floors looking their best.",
+    "es": "1. Barra o trapee diariamente para eliminar la suciedad que causa arañazos. 2. Use almohadillas de fieltro debajo de los muebles. 3. Mantenga la humedad entre 35-55% para evitar que la madera se expanda o contraiga. 4. Limpie los derrames inmediatamente. 5. Programe un reacabado profesional cada 5-7 años."
+  },
+  "blog-card3-read": {
+    "en": "Read More",
+    "es": "Leer Más"
+  },
+  "blog-card3-less": {
+    "en": "Show Less",
+    "es": "Mostrar Menos"
+  },
   "blog-cta": {
     "en": "Get Free Quote",
     "es": "Consigue un presupuesto gratuito"
   },
   "newsletter-eyebrow": {
-    "en": "Get a Free Quote ",
-    "es": "Consigue un presupuesto gratuito"
+    "en": "Tell Us About Your Project",
+    "es": "Cuéntanos Sobre Tu Proyecto"
   },
   "newsletter-btn": {
-    "en": "Next: Submit Application",
-    "es": "Enviar solicitud"
+    "en": "Send Message",
+    "es": "Enviar Mensaje"
   },
   "footer-text": {
     "en": "Promaster Flooring",
