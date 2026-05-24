@@ -252,6 +252,18 @@ WIDGET_TEMPLATE = """
             color: #999;
             text-align: center;
         }
+        
+        @media (max-width: 600px) {
+            .summary-section {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            .write-review-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
