@@ -18,10 +18,10 @@
       <ul class="site-header__nav">
         <li><a href="#about" data-eid="nav-about"><%- contentByLang[lang]['nav-about'] %></a></li>
         <li><a href="#work" data-eid="nav-services"><%- contentByLang[lang]['nav-services'] %></a></li>
-        <li><a href="#process" data-eid="nav-whyus"><%- contentByLang[lang]['nav-whyus'] %></a></li>
+        <li><a href="#gallery" data-eid="nav-whyus"><%- contentByLang[lang]['nav-whyus'] %></a></li>
         <li><a href="#blog" data-eid="nav-blog"><%- contentByLang[lang]['nav-blog'] %></a></li>
         <li><a href="#reviews" data-eid="nav-reviews"><%- contentByLang[lang]['nav-reviews'] %></a></li>
-        <li><a href="#contact" class="nav-cta" data-eid="nav-contact"><%- contentByLang[lang]['nav-contact'] %></a></li>
+        <li><a href="#contact-footer" data-eid="nav-contact"><%- contentByLang[lang]['nav-contact'] %></a></li>
         <li class="lang-toggle-container">
           <button id="lang-toggle" class="lang-toggle" aria-label="Switch language">
             <span id="lang-label"><%= lang === 'en' ? 'ES' : 'EN' %></span>
@@ -36,14 +36,23 @@
         <div class="hero__shadow"></div>
         <div class="hero__content">
           <h1 data-eid="hero-heading"><%- contentByLang[lang]['hero-heading'] %></h1>
-          <p data-eid="hero-text"><%- contentByLang[lang]['hero-text'] %></p>
           <a href="#contact" class="btn btn-dark" data-eid="hero-cta"><%- contentByLang[lang]['hero-cta'] %></a>
         </div>
       </section>
 
-      <section class="top-workplaces" id="about">
-        <h2 data-eid="feat-eyebrow-1"><%- contentByLang[lang]['feat-eyebrow-1'] %></h2>
-        <p data-eid="feat-text-1"><%- contentByLang[lang]['feat-text-1'] %></p>
+      <section class="about-section" id="about">
+        <div class="about-row">
+          <div class="about-left">
+            <h2 data-eid="feat-eyebrow-1"><%- contentByLang[lang]['feat-eyebrow-1'] %></h2>
+            <p data-eid="feat-text-1"><%- contentByLang[lang]['feat-text-1'] %></p>
+          </div>
+          <div class="about-right">
+            <div class="homeadvisor-badge">
+              <span class="badge-label">HomeAdvisor Top Rated Remodelers</span>
+              <span class="badge-rating">4.9 <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="work-section" id="work">
@@ -53,14 +62,14 @@
         </div>
         <div class="work-grid">
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/hardwood remodeling.png');"></div>
             <div class="work-card__overlay">
               <h3 data-eid="svc1-eyebrow"><%- contentByLang[lang]['svc1-eyebrow'] %></h3>
               <p data-eid="svc1-text"><%- contentByLang[lang]['svc1-text'] %></p>
             </div>
           </div>
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/wood refinishing.png');"></div>
             <div class="work-card__overlay">
               <h3 data-eid="svc2-eyebrow"><%- contentByLang[lang]['svc2-eyebrow'] %></h3>
               <p data-eid="svc2-text"><%- contentByLang[lang]['svc2-text'] %></p>
@@ -74,21 +83,63 @@
             </div>
           </div>
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/patio remodeeling.png');"></div>
             <div class="work-card__overlay">
-              <h3 data-eid="svc-eyebrow"><%- contentByLang[lang]['svc-eyebrow'] %></h3>
-              <p data-eid="svc-copy"><%- contentByLang[lang]['svc-copy'] %></p>
+              <h3 data-eid="svc4-eyebrow"><%- contentByLang[lang]['svc4-eyebrow'] %></h3>
+              <p data-eid="svc4-text"><%- contentByLang[lang]['svc4-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/kitchen remodeliing.png');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc5-eyebrow"><%- contentByLang[lang]['svc5-eyebrow'] %></h3>
+              <p data-eid="svc5-text"><%- contentByLang[lang]['svc5-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/bathroom remodelling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc6-eyebrow"><%- contentByLang[lang]['svc6-eyebrow'] %></h3>
+              <p data-eid="svc6-text"><%- contentByLang[lang]['svc6-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/fireplace remodeling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc7-eyebrow"><%- contentByLang[lang]['svc7-eyebrow'] %></h3>
+              <p data-eid="svc7-text"><%- contentByLang[lang]['svc7-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/staircase remodeling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 data-eid="svc8-eyebrow"><%- contentByLang[lang]['svc8-eyebrow'] %></h3>
+              <p data-eid="svc8-text"><%- contentByLang[lang]['svc8-text'] %></p>
             </div>
           </div>
         </div>
-        <div class="work-cta">
-          <a href="#contact" class="btn btn-dark" data-eid="work-cta"><%- contentByLang[lang]['work-cta'] %></a>
-        </div>
       </section>
 
-      <section class="cta-banner" id="process">
-        <h2 data-eid="feat-eyebrow-2"><%- contentByLang[lang]['feat-eyebrow-2'] %></h2>
-        <a href="#contact" class="btn btn-outline-light" data-eid="cta-btn"><%- contentByLang[lang]['cta-btn'] %></a>
+
+      <section class="gallery-section" id="gallery">
+        <div class="gallery__head">
+          <h2 data-eid="gallery-heading"><%- contentByLang[lang]['gallery-heading'] %></h2>
+          <p data-eid="gallery-subtitle"><%- contentByLang[lang]['gallery-subtitle'] %></p>
+        </div>
+        <div class="gallery-carousel">
+          <button class="gallery-arrow gallery-arrow--prev" id="gallery-prev" aria-label="Previous">&#10094;</button>
+          <div class="gallery-viewport" id="gallery-viewport">
+            <div class="gallery-track" id="gallery-track">
+              <% photos.forEach(function(photo) { %>
+                <div class="gallery-slide">
+                  <img src="/projects/<%= photo %>" alt="<%= photo %>" />
+                </div>
+              <% }); %>
+            </div>
+          </div>
+          <button class="gallery-arrow gallery-arrow--next" id="gallery-next" aria-label="Next">&#10095;</button>
+        </div>
+        <div class="gallery-dots" id="gallery-dots"></div>
       </section>
 
       <section class="reviews-section" id="reviews">
@@ -108,6 +159,8 @@
             <div class="blog-card__body">
               <h3 data-eid="card3-heading"><%- contentByLang[lang]['card3-heading'] %></h3>
               <p data-eid="blog-card1-text"><%- contentByLang[lang]['blog-card1-text'] %></p>
+              <div class="blog-full" data-eid="blog-card1-full"><%- contentByLang[lang]['blog-card1-full'] %></div>
+              <button class="blog-toggle" data-read="blog-card1-read" data-less="blog-card1-less"><%- contentByLang[lang]['blog-card1-read'] %></button>
             </div>
           </article>
           <article class="blog-card">
@@ -115,6 +168,8 @@
             <div class="blog-card__body">
               <h3 data-eid="card1-heading"><%- contentByLang[lang]['card1-heading'] %></h3>
               <p data-eid="card1-text"><%- contentByLang[lang]['card1-text'] %></p>
+              <div class="blog-full" data-eid="card1-full"><%- contentByLang[lang]['card1-full'] %></div>
+              <button class="blog-toggle" data-read="card1-read" data-less="card1-less"><%- contentByLang[lang]['card1-read'] %></button>
             </div>
           </article>
           <article class="blog-card">
@@ -122,59 +177,48 @@
             <div class="blog-card__body">
               <h3 data-eid="card2-eyebrow"><%- contentByLang[lang]['card2-eyebrow'] %></h3>
               <p data-eid="blog-card3-text"><%- contentByLang[lang]['blog-card3-text'] %></p>
+              <div class="blog-full" data-eid="blog-card3-full"><%- contentByLang[lang]['blog-card3-full'] %></div>
+              <button class="blog-toggle" data-read="blog-card3-read" data-less="blog-card3-less"><%- contentByLang[lang]['blog-card3-read'] %></button>
             </div>
           </article>
         </div>
-        <div class="blog-cta">
-          <a href="#contact" class="btn btn-dark" data-eid="blog-cta"><%- contentByLang[lang]['blog-cta'] %></a>
-        </div>
       </section>
 
-      <section class="newsletter-section" id="contact">
-        <h3 data-eid="newsletter-eyebrow"><%- contentByLang[lang]['newsletter-eyebrow'] %></h3>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Your Email Address" />
-          <button class="btn btn-dark" data-eid="newsletter-btn"><%- contentByLang[lang]['newsletter-btn'] %></button>
+      <section class="gallery-section" id="gallery">
+      </section>
+
+      <section class="contact-section" id="contact">
+        <div class="contact-form-container">
+          <h3 data-eid="newsletter-eyebrow"><%- contentByLang[lang]['newsletter-eyebrow'] %></h3>
+          <form class="contact-form" id="contact-form">
+            <textarea name="message" placeholder="Describe what you're looking to do..." required></textarea>
+            <div class="contact-inputs">
+              <input type="email" name="email" placeholder="Your Email" />
+              <input type="tel" name="phone" placeholder="Your Phone Number" />
+            </div>
+            <button type="submit" class="btn btn-dark" data-eid="newsletter-btn"><%- contentByLang[lang]['newsletter-btn'] %></button>
+          </form>
+          <div class="form-success" id="form-success" style="display:none;">
+            <p>Message sent! Someone will contact you back within one business day.</p>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__logo">
-        <span class="mark">PM</span>
-        <h2 data-eid="footer-text"><%- contentByLang[lang]['footer-text'] %></h2>
-      </div>
-      <div class="site-footer__nav">
-        <a href="#about" data-eid="footer-nav-about"><%- contentByLang[lang]['footer-nav-about'] %></a>
-        <a href="#work" data-eid="footer-nav-services"><%- contentByLang[lang]['footer-nav-services'] %></a>
-        <a href="#blog" data-eid="footer-nav-blog"><%- contentByLang[lang]['footer-nav-blog'] %></a>
-        <a href="#contact" data-eid="footer-nav-estimate"><%- contentByLang[lang]['footer-nav-estimate'] %></a>
-      </div>
-      <div class="site-footer__locations">
-        <div class="footer-location">
-          <h4 data-eid="footer-loc1-heading"><%- contentByLang[lang]['footer-loc1-heading'] %></h4>
-          <p data-eid="footer-loc1-text"><%- contentByLang[lang]['footer-loc1-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 data-eid="footer-loc2-heading"><%- contentByLang[lang]['footer-loc2-heading'] %></h4>
-          <p data-eid="footer-loc2-text"><%- contentByLang[lang]['footer-loc2-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 data-eid="footer-loc3-heading"><%- contentByLang[lang]['footer-loc3-heading'] %></h4>
-          <p data-eid="footer-loc3-text"><%- contentByLang[lang]['footer-loc3-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 data-eid="footer-loc4-heading"><%- contentByLang[lang]['footer-loc4-heading'] %></h4>
-          <p data-eid="footer-loc4-text"><%- contentByLang[lang]['footer-loc4-text'] %></p>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
+    <footer class="site-footer" id="contact-footer">
+      <div class="footer-cta">
+        <h2 data-eid="feat-eyebrow-2"><%- contentByLang[lang]['feat-eyebrow-2'] %></h2>
+        <a href="tel:2148743789" class="footer-phone" data-eid="cta-btn"><%- contentByLang[lang]['cta-btn'] %></a>
         <div class="social-links">
-          <a href="#" target="_blank" aria-label="Facebook">FB</a>
-          <a href="#" target="_blank" aria-label="Instagram">IG</a>
+          <a href="#" target="_blank" aria-label="Facebook">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" aria-label="Instagram">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
         </div>
-        <small data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
       </div>
+      <small class="footer-copyright" data-eid="footer-copyright"><%- contentByLang[lang]['footer-copyright'] %> <%= new Date().getFullYear() %></small>
     </footer>
 
     <script>
@@ -194,6 +238,17 @@
         document.documentElement.lang = lang;
         var label = document.getElementById("lang-label");
         if (label) label.textContent = lang === 'en' ? 'ES' : 'EN';
+        var btns = document.querySelectorAll(".blog-toggle");
+        btns.forEach(function(b) {
+          var full = b.parentElement.querySelector(".blog-full");
+          var readKey = b.getAttribute("data-read");
+          var lessKey = b.getAttribute("data-less");
+          if (full && full.classList.contains("open")) {
+            b.textContent = ALL_CONTENT[lessKey] ? ALL_CONTENT[lessKey][lang] : "Show Less";
+          } else {
+            b.textContent = ALL_CONTENT[readKey] ? ALL_CONTENT[readKey][lang] : "Read More";
+          }
+        });
         try { localStorage.setItem("pref-lang", lang); } catch(e) {}
       }
 
@@ -230,6 +285,90 @@
           }
         });
       })();
+
+      var photos = <%- JSON.stringify(photos) %>;
+      (function() {
+        var track = document.getElementById("gallery-track");
+        var prevBtn = document.getElementById("gallery-prev");
+        var nextBtn = document.getElementById("gallery-next");
+        var dotsContainer = document.getElementById("gallery-dots");
+        if (!track) return;
+        var slides = track.querySelectorAll(".gallery-slide");
+        var current = 0;
+
+        function goTo(index) {
+          if (index < 0) index = slides.length - 1;
+          if (index >= slides.length) index = 0;
+          current = index;
+          track.style.transform = "translateX(-" + (current * 100) + "%)";
+          var dots = dotsContainer.querySelectorAll(".gallery-dot");
+          dots.forEach(function(d, i) {
+            d.classList.toggle("active", i === current);
+          });
+        }
+
+        if (prevBtn) prevBtn.addEventListener("click", function() { goTo(current - 1); });
+        if (nextBtn) nextBtn.addEventListener("click", function() { goTo(current + 1); });
+
+        if (dotsContainer) {
+          for (var i = 0; i < slides.length; i++) {
+            var dot = document.createElement("button");
+            dot.className = "gallery-dot" + (i === 0 ? " active" : "");
+            dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+            dot.addEventListener("click", (function(idx) { return function() { goTo(idx); }; })(i));
+            dotsContainer.appendChild(dot);
+          }
+        }
+
+        document.addEventListener("keydown", function(e) {
+          if (e.key === "ArrowLeft") goTo(current - 1);
+          if (e.key === "ArrowRight") goTo(current + 1);
+        });
+      })();
+
+      (function() {
+        var toggles = document.querySelectorAll(".blog-toggle");
+        toggles.forEach(function(btn) {
+          btn.addEventListener("click", function() {
+            var full = btn.parentElement.querySelector(".blog-full");
+            if (!full) return;
+            full.classList.toggle("open");
+            var readKey = btn.getAttribute("data-read");
+            var lessKey = btn.getAttribute("data-less");
+            if (full.classList.contains("open")) {
+              btn.textContent = ALL_CONTENT[lessKey] ? ALL_CONTENT[lessKey][currentLang] : "Show Less";
+            } else {
+              btn.textContent = ALL_CONTENT[readKey] ? ALL_CONTENT[readKey][currentLang] : "Read More";
+            }
+          });
+        });
+      })();
+
+      var contactForm = document.getElementById("contact-form");
+      if (contactForm) {
+        contactForm.addEventListener("submit", function(e) {
+          e.preventDefault();
+          var formData = new FormData(contactForm);
+          fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              message: formData.get("message"),
+              email: formData.get("email"),
+              phone: formData.get("phone"),
+            }),
+          })
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+              contactForm.style.display = "none";
+              document.getElementById("form-success").style.display = "block";
+            })
+            .catch(function () {
+              contactForm.style.display = "none";
+              document.getElementById("form-success").style.display = "block";
+            });
+        });
+      }
     </script>
   </body>
 </html>

@@ -1,7 +1,10 @@
+import "dotenv/config";
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
+import twilio from "twilio";
+import nodemailer from "nodemailer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,14 +56,33 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+app.get("/", async (req, res) => {
   const lang = req.query.lang === "es" ? "es" : "en";
+  let photos = [];
+  try {
+    const files = await fs.readdir(path.join(__dirname, "public", "projects"));
+    photos = files.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
+  } catch {}
   res.render("index", {
     title: "Promaster Floors",
     description: "Flooring contractor serving Dallas / Fort Worth, Texas.",
     contentByLang,
     content,
     lang,
+    photos,
   });
 });
 
@@ -180,5 +202,47 @@ app.post("/api/translate-all", async (req, res) => {
     res.status(500).json({ error: "Translation failed" });
   }
 });
+
+app.post("/api/contact", async (req, res) => {
+  const { message, email, phone } = req.body;
+  if (!message || typeof message !== "string") {
+    return res.status(400).json({ error: "Message is required" });
+  }
+
+  const text = `New inquiry from promasterfloors.com\n\nMessage: ${message}\nEmail: ${email || "N/A"}\nPhone: ${phone || "N/A"}`;
+
+  try {
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.TO_EMAIL,
+      subject: "New inquiry from promasterfloors.com",
+      text,
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Email error:", err);
+    res.status(500).json({ error: "Failed to send message" });
+  }
+});
+
+// Twilio SMS route — kept for future use
+// app.post("/api/contact", async (req, res) => {
+//   const { message, email, phone } = req.body;
+//   if (!message || typeof message !== "string") {
+//     return res.status(400).json({ error: "Message is required" });
+//   }
+//   const body = `New inquiry from promasterfloors.com\n\nMessage: ${message}\nEmail: ${email || "N/A"}\nPhone: ${phone || "N/A"}`;
+//   try {
+//     await twilioClient.messages.create({
+//       body,
+//       from: process.env.TWILIO_PHONE_NUMBER,
+//       to: process.env.TO_PHONE,
+//     });
+//     res.json({ success: true });
+//   } catch (err) {
+//     console.error("SMS error:", err);
+//     res.status(500).json({ error: "Failed to send message" });
+//   }
+// });
 
 app.listen(port, console.log(`listening on port ${port}`));
