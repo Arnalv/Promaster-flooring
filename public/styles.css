@@ -948,3 +948,64 @@ button {
     padding: 1rem 1.2rem;
   }
 }
+
+/* ─── Popup ─── */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  display: none;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.popup-overlay.open {
+  display: flex;
+}
+
+.popup-content {
+  background: #fff;
+  width: 500px;
+  max-width: 90vw;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  box-shadow: -4px 0 20px rgba(0,0,0,0.2);
+}
+
+.popup-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  line-height: 1;
+  padding: 0;
+}
+
+.popup-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+#copyright-link {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+#copyright-link:hover {
+  opacity: 0.7;
+}
