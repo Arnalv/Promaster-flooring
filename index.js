@@ -86,6 +86,30 @@ app.get("/", async (req, res) => {
   });
 });
 
+app.get("/terms", async (req, res) => {
+  try {
+    const termsText = await fs.readFile(path.join(__dirname, "public", "terms-of-service.txt"), "utf-8");
+    res.render("terms", {
+      title: "Terms of Service — Promaster Floors",
+      termsText,
+    });
+  } catch {
+    res.status(500).send("Could not load terms of service.");
+  }
+});
+
+app.get("/privacy", async (req, res) => {
+  try {
+    const policyText = await fs.readFile(path.join(__dirname, "public", "privacy-policy.txt"), "utf-8");
+    res.render("privacy", {
+      title: "Privacy Policy — Promaster Floors",
+      policyText,
+    });
+  } catch {
+    res.status(500).send("Could not load privacy policy.");
+  }
+});
+
 app.get("/edit", (req, res) => {
   res.render("edit", {
     title: "Promaster Floors",
