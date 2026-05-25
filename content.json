@@ -92,8 +92,8 @@
     "es": "Remodelación de cocinas"
   },
   "svc5-text": {
-    "en": "Full kitchen remodeling — from layout redesign to custom cabinetry, countertops, backsplash and finishes to build the kitchen you've always wanted.",
-    "es": "Remodelación completa de cocinas — desde el rediseño de la distribución hasta gabinetes personalizados, encimeras, salpicaderos y acabados. Trabajamos con usted para diseñar y construir la cocina que siempre ha deseado."
+    "en": "From layout redesign to custom cabinetry, countertops, backsplash and finishes to build the kitchen you've always wanted.",
+    "es": "Desde el rediseño de la distribución hasta gabinetes personalizados, encimeras, salpicaderos y acabados para construir la cocina que siempre ha deseado."
   },
   "svc6-eyebrow": {
     "en": "Bathroom Remodeling",
@@ -126,6 +126,30 @@
   "gallery-subtitle": {
     "en": "Take a look at some of our recent work.",
     "es": "Eche un vistazo a algunos de nuestros trabajos recientes."
+  },
+  "gallery-cat-flooring": {
+    "en": "Floor and Tile Remodeling",
+    "es": "Remodelación de Pisos y Azulejos"
+  },
+  "gallery-cat-outdoor": {
+    "en": "Outdoor Remodeling",
+    "es": "Remodelación de Exteriores"
+  },
+  "gallery-cat-kitchen": {
+    "en": "Kitchen Remodeling",
+    "es": "Remodelación de Cocinas"
+  },
+  "gallery-cat-bathroom": {
+    "en": "Bathroom Remodeling",
+    "es": "Remodelación de Baños"
+  },
+  "gallery-cat-fireplace": {
+    "en": "Fireplace Remodeling",
+    "es": "Remodelación de Chimeneas"
+  },
+  "gallery-cat-staircase": {
+    "en": "Staircase Remodeling",
+    "es": "Remodelación de Escaleras"
   },
   "work-cta": {
     "en": "Request a quote",

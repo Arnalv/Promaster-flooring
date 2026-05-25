@@ -131,20 +131,20 @@
           <h2 data-eid="gallery-heading"><%- contentByLang[lang]['gallery-heading'] %></h2>
           <p data-eid="gallery-subtitle"><%- contentByLang[lang]['gallery-subtitle'] %></p>
         </div>
-        <div class="gallery-carousel">
-          <button class="gallery-arrow gallery-arrow--prev" id="gallery-prev" aria-label="Previous">&#10094;</button>
-          <div class="gallery-viewport" id="gallery-viewport">
-            <div class="gallery-track" id="gallery-track">
-              <% photos.forEach(function(photo) { %>
-                <div class="gallery-slide">
-                  <img src="/projects/<%= photo %>" alt="<%= photo %>" />
-                </div>
-              <% }); %>
+        <% galleryCategories.forEach(function(cat) { %>
+          <% if (cat.files.length > 0) { %>
+            <div class="gallery-category">
+              <h3 class="gallery-cat-title" data-eid="gallery-cat-<%= cat.key %>"><%- contentByLang[lang]['gallery-cat-' + cat.key] %></h3>
+              <div class="gallery-strip">
+                <% cat.files.forEach(function(photo) { %>
+                  <div class="gallery-strip-item">
+                    <img src="/projects/<%= photo %>" alt="<%= photo %>" loading="lazy" />
+                  </div>
+                <% }); %>
+              </div>
             </div>
-          </div>
-          <button class="gallery-arrow gallery-arrow--next" id="gallery-next" aria-label="Next">&#10095;</button>
-        </div>
-        <div class="gallery-dots" id="gallery-dots"></div>
+          <% } %>
+        <% }); %>
       </section>
 
       <section class="reviews-section" id="reviews">
@@ -187,9 +187,6 @@
             </div>
           </article>
         </div>
-      </section>
-
-      <section class="gallery-section" id="gallery">
       </section>
 
       <section class="contact-section" id="contact">
@@ -313,46 +310,6 @@
             });
           });
         }
-      })();
-
-      var photos = <%- JSON.stringify(photos) %>;
-      (function() {
-        var track = document.getElementById("gallery-track");
-        var prevBtn = document.getElementById("gallery-prev");
-        var nextBtn = document.getElementById("gallery-next");
-        var dotsContainer = document.getElementById("gallery-dots");
-        if (!track) return;
-        var slides = track.querySelectorAll(".gallery-slide");
-        var current = 0;
-
-        function goTo(index) {
-          if (index < 0) index = slides.length - 1;
-          if (index >= slides.length) index = 0;
-          current = index;
-          track.style.transform = "translateX(-" + (current * 100) + "%)";
-          var dots = dotsContainer.querySelectorAll(".gallery-dot");
-          dots.forEach(function(d, i) {
-            d.classList.toggle("active", i === current);
-          });
-        }
-
-        if (prevBtn) prevBtn.addEventListener("click", function() { goTo(current - 1); });
-        if (nextBtn) nextBtn.addEventListener("click", function() { goTo(current + 1); });
-
-        if (dotsContainer) {
-          for (var i = 0; i < slides.length; i++) {
-            var dot = document.createElement("button");
-            dot.className = "gallery-dot" + (i === 0 ? " active" : "");
-            dot.setAttribute("aria-label", "Go to slide " + (i + 1));
-            dot.addEventListener("click", (function(idx) { return function() { goTo(idx); }; })(i));
-            dotsContainer.appendChild(dot);
-          }
-        }
-
-        document.addEventListener("keydown", function(e) {
-          if (e.key === "ArrowLeft") goTo(current - 1);
-          if (e.key === "ArrowRight") goTo(current + 1);
-        });
       })();
 
       (function() {

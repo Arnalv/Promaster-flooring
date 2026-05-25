@@ -62,6 +62,45 @@ app.get("/", async (req, res) => {
     const files = await fs.readdir(path.join(__dirname, "public", "projects"));
     photos = files.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
   } catch {}
+
+  const categories = {
+    flooring: { label: "Floor and Tile Remodeling", files: [] },
+    outdoor: { label: "Outdoor Remodeling", files: [] },
+    bathroom: { label: "Bathroom Remodeling", files: [] },
+    staircase: { label: "Staircase Remodeling", files: [] },
+  };
+
+  photos.forEach((f) => {
+    const lower = f.toLowerCase();
+    if (lower.includes("flooring") || lower.includes("kitchen") || lower.includes("fireplace")) {
+      categories.flooring.files.push(f);
+    } else if (lower.includes("bathroom") || lower.includes("bathroon")) {
+      categories.bathroom.files.push(f);
+    } else if (lower.includes("outdoor")) {
+      categories.outdoor.files.push(f);
+    } else if (lower.includes("staircase")) {
+      categories.staircase.files.push(f);
+    } else {
+      categories.outdoor.files.push(f);
+    }
+  });
+
+  Object.keys(categories).forEach((key) => {
+    categories[key].files.sort((a, b) => {
+      const aFire = a.toLowerCase().includes("fireplace");
+      const bFire = b.toLowerCase().includes("fireplace");
+      if (aFire && !bFire) return 1;
+      if (!aFire && bFire) return -1;
+      return a.localeCompare(b, undefined, { sensitivity: "base" });
+    });
+  });
+
+  const galleryCategories = Object.keys(categories).map((key) => ({
+    key,
+    label: categories[key].label,
+    files: categories[key].files,
+  }));
+
   res.render("index", {
     title: "Promaster Floors",
     description: "Flooring contractor serving Dallas / Fort Worth, Texas.",
@@ -69,6 +108,7 @@ app.get("/", async (req, res) => {
     content,
     lang,
     photos,
+    galleryCategories,
   });
 });
 
