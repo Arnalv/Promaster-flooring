@@ -89,6 +89,55 @@ app.post("/api/upload-image", (req, res) => {
   });
 });
 
+const projectsDir = path.join(__dirname, "public", "projects");
+const projectStorage = multer.diskStorage({
+  destination: projectsDir,
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname) || ".jpg";
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + ext);
+  },
+});
+const projectUpload = multer({
+  storage: projectStorage,
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Only image files are allowed"));
+    }
+    cb(null, true);
+  },
+});
+
+app.post("/api/upload-gallery", (req, res) => {
+  projectUpload.single("image")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    res.json({ url: "/projects/" + req.file.filename });
+  });
+});
+
+app.delete("/api/gallery", async (req, res) => {
+  const filename = req.query.filename;
+  if (!filename || typeof filename !== "string") {
+    return res.status(400).json({ error: "Invalid filename" });
+  }
+  const safe = path.basename(filename);
+  const filePath = path.join(__dirname, "public", "projects", safe);
+  try {
+    await fs.unlink(filePath);
+    res.json({ success: true });
+  } catch {
+    res.status(500).json({ error: "Failed to delete file" });
+  }
+});
+
 app.get("/edit", async (req, res) => {
   let galleryCategories = [];
   try {

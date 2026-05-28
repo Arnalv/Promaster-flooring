@@ -159,6 +159,54 @@
       .has-replace-btn:hover .img-overlay {
         background: rgba(255,255,255,0.25);
       }
+      .gallery-add-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.3rem 0.8rem;
+        border: 1px dashed rgba(107,47,160,0.4);
+        background: rgba(107,47,160,0.06);
+        color: #6B2FA0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: 'Lato', sans-serif;
+        border-radius: 0;
+        flex-shrink: 0;
+      }
+      .gallery-add-btn:hover {
+        background: rgba(107,47,160,0.12);
+        border-color: #6B2FA0;
+      }
+      .gallery-remove-btn {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        z-index: 60;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+        border-radius: 50%;
+        line-height: 1;
+        font-family: 'Lato', sans-serif;
+        padding: 0;
+      }
+      .gallery-remove-btn:hover {
+        background: rgba(180,0,0,0.8);
+      }
+      .has-replace-btn:hover .gallery-remove-btn {
+        opacity: 1;
+      }
     </style>
   </head>
   <body class="edit-header-push">
@@ -296,7 +344,10 @@
         <% galleryCategories.forEach(function(cat) { %>
           <% if (cat.files.length > 0) { %>
             <div class="gallery-category">
-              <h3 class="gallery-cat-title" contenteditable="true" data-eid="gallery-cat-<%= cat.key %>"><%- contentByLang.en['gallery-cat-' + cat.key] %></h3>
+              <div style="display:flex;align-items:baseline;gap:0.75rem;border-bottom:2px solid #eee;padding-bottom:0.5rem;margin:0 0 1.2rem;">
+                <h3 class="gallery-cat-title" contenteditable="true" data-eid="gallery-cat-<%= cat.key %>" style="margin:0;border:none;padding:0;"><%- contentByLang.en['gallery-cat-' + cat.key] %></h3>
+                <button class="gallery-add-btn" data-category="<%= cat.key %>">+ Add</button>
+              </div>
               <div class="gallery-strip">
                 <% cat.files.forEach(function(photo) { %>
                   <div class="gallery-strip-item">
@@ -630,6 +681,37 @@
         }.bind(bgContainers[i]));
       }
 
+      function setupGalleryRemove(item, img) {
+        var rmBtn = document.createElement("button");
+        rmBtn.className = "gallery-remove-btn";
+        rmBtn.innerHTML = "&times;";
+        item.appendChild(rmBtn);
+
+        rmBtn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          if (!confirm("Remove this image?")) return;
+          var src = img.getAttribute("src");
+          var filename = src.split("/").pop();
+          fetch("/api/gallery?filename=" + encodeURIComponent(filename), {
+            method: "DELETE",
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error("Delete failed");
+              return r.json();
+            })
+            .then(function (data) {
+              if (data.success) {
+                item.remove();
+                setStatus("Image removed!");
+                setTimeout(function () { setStatus(""); }, 2000);
+              }
+            })
+            .catch(function (err) {
+              setStatus("Delete error: " + err.message, true);
+            });
+        });
+      }
+
       var galleryItems = document.querySelectorAll(".gallery-strip-item");
       for (var i = 0; i < galleryItems.length; i++) {
         (function (item) {
@@ -638,7 +720,60 @@
           setupImageReplace(item, function (url) {
             img.src = url;
           });
+          setupGalleryRemove(item, img);
         })(galleryItems[i]);
+      }
+
+      var addButtons = document.querySelectorAll(".gallery-add-btn");
+      for (var i = 0; i < addButtons.length; i++) {
+        (function (btn) {
+          var input = document.createElement("input");
+          input.type = "file";
+          input.accept = "image/*";
+          input.className = "img-replace-input";
+          btn.appendChild(input);
+
+          btn.addEventListener("click", function (e) {
+            if (e.target === input) return;
+            input.click();
+          });
+
+          input.addEventListener("change", function () {
+            var file = input.files[0];
+            if (!file) return;
+
+            setStatus("Uploading...");
+            var fd = new FormData();
+            fd.append("image", file);
+
+            fetch("/api/upload-gallery", { method: "POST", body: fd })
+              .then(function (r) {
+                if (!r.ok) throw new Error("Upload failed");
+                return r.json();
+              })
+              .then(function (data) {
+                if (data.url) {
+                  var strip = btn.closest(".gallery-category").querySelector(".gallery-strip");
+                  var item = document.createElement("div");
+                  item.className = "gallery-strip-item";
+                  var img = document.createElement("img");
+                  img.src = data.url;
+                  img.alt = "Gallery image";
+                  item.appendChild(img);
+                  strip.insertBefore(item, strip.firstChild);
+                  setupImageReplace(item, function (url) {
+                    img.src = url;
+                  });
+                  setupGalleryRemove(item, img);
+                  setStatus("Image added!");
+                  setTimeout(function () { setStatus(""); }, 2000);
+                }
+              })
+              .catch(function (err) {
+                setStatus("Upload error: " + err.message, true);
+              });
+          });
+        })(addButtons[i]);
       }
     </script>
   </body>
