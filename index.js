@@ -5,6 +5,9 @@ import fs from "fs/promises";
 import { fileURLToPath } from "url";
 import twilio from "twilio";
 import nodemailer from "nodemailer";
+import multer from "multer";
+import bcrypt from "bcryptjs";
+import session from "express-session";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,10 +40,68 @@ async function loadContent() {
 }
 await loadContent();
 
+let googleTranslate;
+async function getTranslator() {
+  if (!googleTranslate) {
+    googleTranslate = (await import("@iamtraction/google-translate")).default;
+  }
+  return googleTranslate;
+}
+
+async function translateText(text, to) {
+  const t = await getTranslator();
+  const result = await t(text, { to });
+  return result.text;
+}
+
 app.use(express.json({ limit: "1mb" }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || "edit-server-secret",
+  resave: false,
+  saveUninitialized: false,
+}));
+
+function requireAuth(req, res, next) {
+  if (req.session && req.session.authenticated) {
+    return next();
+  }
+  res.redirect("/login");
+}
+
+app.get("/login", (req, res) => {
+  res.render("login", { error: null });
+});
+
+app.post("/login", express.urlencoded({ extended: false }), async (req, res) => {
+  const { username, password } = req.body;
+  const expectedUser = process.env.EDIT_USERNAME;
+  const expectedHash = process.env.EDIT_PASSWORD_HASH;
+  if (!expectedUser || !expectedHash) {
+    return res.render("login", { error: "Server not configured" });
+  }
+  if (username !== expectedUser) {
+    return res.render("login", { error: "Invalid credentials" });
+  }
+  try {
+    const match = await bcrypt.compare(password, expectedHash);
+    if (!match) {
+      return res.render("login", { error: "Invalid credentials" });
+    }
+    req.session.authenticated = true;
+    res.redirect("/edit");
+  } catch {
+    res.render("login", { error: "Server error" });
+  }
+});
+
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/login");
+});
 
 const twilioClient = twilio(
   process.env.TWILIO_ACCOUNT_SID,
@@ -158,6 +219,284 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
+// ─── Edit / Admin Routes ────────────────────────────────────────────
+
+const uploadsDir = path.join(__dirname, "public", "uploads");
+const storage = multer.diskStorage({
+  destination: uploadsDir,
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname) || ".jpg";
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + ext);
+  },
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Only image files are allowed"));
+    }
+    cb(null, true);
+  },
+});
+
+const projectsDir = path.join(__dirname, "public", "projects");
+const pendingDir = path.join(projectsDir, "pending");
+const projectStorage = multer.diskStorage({
+  destination: pendingDir,
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname) || ".jpg";
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + ext);
+  },
+});
+const projectUpload = multer({
+  storage: projectStorage,
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Only image files are allowed"));
+    }
+    cb(null, true);
+  },
+});
+
+app.get("/edit", requireAuth, async (req, res) => {
+  let galleryCategories = [];
+  try {
+    let approvedFiles = [], pendingFiles = [];
+    try {
+      approvedFiles = await fs.readdir(projectsDir);
+    } catch {}
+    try {
+      pendingFiles = await fs.readdir(pendingDir);
+    } catch {}
+    approvedFiles = approvedFiles.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
+    pendingFiles = pendingFiles.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
+    const photos = [...pendingFiles.map((f) => ({ name: f, pending: true })), ...approvedFiles.map((f) => ({ name: f, pending: false }))];
+    const categories = {
+      flooring: { label: "Floor and Tile Remodeling", files: [] },
+      outdoor: { label: "Outdoor Remodeling", files: [] },
+      bathroom: { label: "Bathroom Remodeling", files: [] },
+      staircase: { label: "Staircase Remodeling", files: [] },
+    };
+    photos.forEach((f) => {
+      const name = typeof f === "string" ? f : f.name;
+      const lower = name.toLowerCase();
+      const entry = typeof f === "string" ? f : f;
+      if (lower.includes("flooring") || lower.includes("kitchen") || lower.includes("fireplace")) {
+        categories.flooring.files.push(entry);
+      } else if (lower.includes("bathroom") || lower.includes("bathroon")) {
+        categories.bathroom.files.push(entry);
+      } else if (lower.includes("outdoor")) {
+        categories.outdoor.files.push(entry);
+      } else if (lower.includes("staircase")) {
+        categories.staircase.files.push(entry);
+      } else {
+        categories.outdoor.files.push(entry);
+      }
+    });
+    Object.keys(categories).forEach((key) => {
+      categories[key].files.sort((a, b) => {
+        const aName = typeof a === "string" ? a : a.name;
+        const bName = typeof b === "string" ? b : b.name;
+        const aFire = aName.toLowerCase().includes("fireplace");
+        const bFire = bName.toLowerCase().includes("fireplace");
+        if (aFire && !bFire) return 1;
+        if (!aFire && bFire) return -1;
+        return aName.localeCompare(bName, undefined, { sensitivity: "base" });
+      });
+    });
+    galleryCategories = Object.keys(categories).map((key) => ({
+      key,
+      label: categories[key].label,
+      files: categories[key].files,
+    }));
+  } catch {}
+
+  res.render("edit", {
+    title: "Promaster Floors",
+    description: "Flooring contractor serving Dallas / Fort Worth, Texas.",
+    contentByLang,
+    content,
+    galleryCategories,
+  });
+});
+
+app.post("/api/save", requireAuth, async (req, res) => {
+  const { en, es, dirtyEn, dirtyEs } = req.body;
+  if (!en || typeof en !== "object") {
+    return res.status(400).json({ error: "Invalid data" });
+  }
+
+  let pendingMoved = false;
+
+  try {
+    let pendingFiles = [];
+    try {
+      pendingFiles = await fs.readdir(pendingDir);
+    } catch {}
+    if (pendingFiles.length > 0) {
+      for (const f of pendingFiles) {
+        const src = path.join(pendingDir, f);
+        const dest = path.join(projectsDir, f);
+        try {
+          await fs.rename(src, dest);
+          pendingMoved = true;
+        } catch {}
+      }
+    }
+
+    for (const [eid, text] of Object.entries(en)) {
+      if (content[eid]) {
+        content[eid].en = text;
+      } else {
+        content[eid] = { en: text, es: "" };
+      }
+    }
+
+    const finalEs = es && typeof es === "object" ? { ...es } : {};
+    for (const [eid, text] of Object.entries(finalEs)) {
+      if (content[eid]) {
+        content[eid].es = text;
+      } else {
+        content[eid] = { en: "", es: text };
+      }
+    }
+
+    const translations = {};
+
+    if (dirtyEn && typeof dirtyEn === "object") {
+      for (const eid in dirtyEn) {
+        if (!dirtyEs || !dirtyEs[eid]) {
+          const text = content[eid]?.en;
+          if (text && text.trim()) {
+            try {
+              const result = await translateText(text, "es");
+              content[eid].es = result;
+              translations[eid] = { es: result };
+            } catch {}
+          }
+        }
+      }
+    }
+
+    if (dirtyEs && typeof dirtyEs === "object") {
+      for (const eid in dirtyEs) {
+        if (!dirtyEn || !dirtyEn[eid]) {
+          const text = content[eid]?.es;
+          if (text && text.trim()) {
+            try {
+              const result = await translateText(text, "en");
+              content[eid].en = result;
+              if (!translations[eid]) translations[eid] = {};
+              translations[eid].en = result;
+            } catch {}
+          }
+        }
+      }
+    }
+
+    await fs.writeFile(contentPath, JSON.stringify(content, null, 2), "utf-8");
+    rebuildContentByLang();
+    res.json({ success: true, translations, pendingMoved });
+  } catch (err) {
+    console.error("Save error:", err);
+    res.status(500).json({ error: "Failed to save" });
+  }
+});
+
+app.post("/api/upload-image", requireAuth, (req, res) => {
+  upload.single("image")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    res.json({ url: "/uploads/" + req.file.filename });
+  });
+});
+
+app.post("/api/upload-gallery", requireAuth, (req, res) => {
+  projectUpload.single("image")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    res.json({ url: "/projects/pending/" + req.file.filename, pending: true });
+  });
+});
+
+app.delete("/api/gallery", requireAuth, async (req, res) => {
+  const filename = req.query.filename;
+  if (!filename || typeof filename !== "string") {
+    return res.status(400).json({ error: "Invalid filename" });
+  }
+  const safe = path.basename(filename);
+  const approvedPath = path.join(projectsDir, safe);
+  const pendingPath = path.join(pendingDir, safe);
+  try {
+    await fs.unlink(approvedPath);
+    return res.json({ success: true });
+  } catch {}
+  try {
+    await fs.unlink(pendingPath);
+    return res.json({ success: true });
+  } catch {
+    return res.status(500).json({ error: "Failed to delete file" });
+  }
+});
+
+app.post("/api/translate", requireAuth, async (req, res) => {
+  const { text, to } = req.body;
+  if (!text || typeof text !== "string") {
+    return res.status(400).json({ error: "Invalid text" });
+  }
+
+  try {
+    const result = await translateText(text, to || "es");
+    res.json({ translation: result });
+  } catch (err) {
+    console.error("Translate error:", err);
+    res.status(500).json({ error: "Translation failed" });
+  }
+});
+
+app.post("/api/translate-all", requireAuth, async (req, res) => {
+  const { texts, to } = req.body;
+  if (!texts || typeof texts !== "object") {
+    return res.status(400).json({ error: "Invalid data" });
+  }
+
+  try {
+    const translations = {};
+    for (const [key, text] of Object.entries(texts)) {
+      if (text && typeof text === "string" && text.trim()) {
+        try {
+          const result = await translateText(text, to || "es");
+          translations[key] = result;
+        } catch {
+          translations[key] = "";
+        }
+      } else {
+        translations[key] = "";
+      }
+    }
+    res.json({ translations });
+  } catch (err) {
+    console.error("Translate all error:", err);
+    res.status(500).json({ error: "Translation failed" });
+  }
+});
+
 // Twilio SMS route — kept for future use
 // app.post("/api/contact", async (req, res) => {
 //   const { message, email, phone } = req.body;
@@ -178,4 +517,9 @@ app.post("/api/contact", async (req, res) => {
 //   }
 // });
 
-app.listen(port, console.log(`listening on port ${port}`));
+const isMain = process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]);
+if (isMain) {
+  app.listen(port, console.log(`listening on port ${port}`));
+}
+
+export default app;

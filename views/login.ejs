@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — Editor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet" />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Lato', sans-serif;
+        background: #f3f3f3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      .login-box {
+        background: #fff;
+        padding: 3rem;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+      .login-box h1 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #6B2FA0;
+        margin-bottom: 0.25rem;
+      }
+      .login-box p {
+        color: #888;
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+      }
+      .login-box label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 0.3rem;
+      }
+      .login-box input {
+        width: 100%;
+        padding: 0.7rem 0.8rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        margin-bottom: 1.2rem;
+        font-family: 'Lato', sans-serif;
+      }
+      .login-box input:focus {
+        outline: none;
+        border-color: #6B2FA0;
+      }
+      .login-box button {
+        width: 100%;
+        padding: 0.8rem;
+        background: #6B2FA0;
+        color: #fff;
+        border: none;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: 'Lato', sans-serif;
+      }
+      .login-box button:hover {
+        background: #4F1F7A;
+      }
+      .login-box .error {
+        color: #cc092f;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-box">
+      <h1>Editor Login</h1>
+      <p>Enter your credentials to manage site content</p>
+      <% if (error) { %>
+        <div class="error"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/login">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Log In</button>
+      </form>
+    </div>
+  </body>
+</html>
