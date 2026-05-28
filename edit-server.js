@@ -3,6 +3,7 @@ import express from "express";
 import path from "path";
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
+import multer from "multer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,17 +50,92 @@ async function translateText(text, to) {
   return result.text;
 }
 
+const uploadsDir = path.join(__dirname, "public", "uploads");
+const storage = multer.diskStorage({
+  destination: uploadsDir,
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname) || ".jpg";
+    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + ext);
+  },
+});
+const upload = multer({
+  storage,
+  limits: { fileSize: 10 * 1024 * 1024 },
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Only image files are allowed"));
+    }
+    cb(null, true);
+  },
+});
+
 app.use(express.json({ limit: "1mb" }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/edit", (req, res) => {
+app.post("/api/upload-image", (req, res) => {
+  upload.single("image")(req, res, (err) => {
+    if (err instanceof multer.MulterError) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    res.json({ url: "/uploads/" + req.file.filename });
+  });
+});
+
+app.get("/edit", async (req, res) => {
+  let galleryCategories = [];
+  try {
+    const files = await fs.readdir(path.join(__dirname, "public", "projects"));
+    const photos = files.filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
+    const categories = {
+      flooring: { label: "Floor and Tile Remodeling", files: [] },
+      outdoor: { label: "Outdoor Remodeling", files: [] },
+      bathroom: { label: "Bathroom Remodeling", files: [] },
+      staircase: { label: "Staircase Remodeling", files: [] },
+    };
+    photos.forEach((f) => {
+      const lower = f.toLowerCase();
+      if (lower.includes("flooring") || lower.includes("kitchen") || lower.includes("fireplace")) {
+        categories.flooring.files.push(f);
+      } else if (lower.includes("bathroom") || lower.includes("bathroon")) {
+        categories.bathroom.files.push(f);
+      } else if (lower.includes("outdoor")) {
+        categories.outdoor.files.push(f);
+      } else if (lower.includes("staircase")) {
+        categories.staircase.files.push(f);
+      } else {
+        categories.outdoor.files.push(f);
+      }
+    });
+    Object.keys(categories).forEach((key) => {
+      categories[key].files.sort((a, b) => {
+        const aFire = a.toLowerCase().includes("fireplace");
+        const bFire = b.toLowerCase().includes("fireplace");
+        if (aFire && !bFire) return 1;
+        if (!aFire && bFire) return -1;
+        return a.localeCompare(b, undefined, { sensitivity: "base" });
+      });
+    });
+    galleryCategories = Object.keys(categories).map((key) => ({
+      key,
+      label: categories[key].label,
+      files: categories[key].files,
+    }));
+  } catch {}
+
   res.render("edit", {
     title: "Promaster Floors",
     description: "Flooring contractor serving Dallas / Fort Worth, Texas.",
     contentByLang,
     content,
+    galleryCategories,
   });
 });
 

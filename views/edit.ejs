@@ -141,6 +141,24 @@
           top: 80px;
         }
       }
+
+      .img-replace-input {
+        display: none;
+      }
+      .has-replace-btn {
+        cursor: pointer;
+      }
+      .img-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 50;
+        background: rgba(255,255,255,0);
+        transition: background 0.25s ease;
+        pointer-events: none;
+      }
+      .has-replace-btn:hover .img-overlay {
+        background: rgba(255,255,255,0.25);
+      }
     </style>
   </head>
   <body class="edit-header-push">
@@ -168,10 +186,16 @@
       <ul class="site-header__nav">
         <li><a href="#about" contenteditable="true" data-eid="nav-about"><%- contentByLang.en['nav-about'] %></a></li>
         <li><a href="#work" contenteditable="true" data-eid="nav-services"><%- contentByLang.en['nav-services'] %></a></li>
-        <li><a href="#process" contenteditable="true" data-eid="nav-whyus"><%- contentByLang.en['nav-whyus'] %></a></li>
+        <li><a href="#gallery" contenteditable="true" data-eid="nav-whyus"><%- contentByLang.en['nav-whyus'] %></a></li>
         <li><a href="#blog" contenteditable="true" data-eid="nav-blog"><%- contentByLang.en['nav-blog'] %></a></li>
-        <li><a href="#contact" class="nav-cta" contenteditable="true" data-eid="nav-contact"><%- contentByLang.en['nav-contact'] %></a></li>
+        <li><a href="#reviews" contenteditable="true" data-eid="nav-reviews"><%- contentByLang.en['nav-reviews'] %></a></li>
+        <li><a href="#contact-footer" contenteditable="true" data-eid="nav-contact"><%- contentByLang.en['nav-contact'] %></a></li>
       </ul>
+      <button id="hamburger" class="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </header>
 
     <main>
@@ -180,14 +204,23 @@
         <div class="hero__shadow"></div>
         <div class="hero__content">
           <h1 contenteditable="true" data-eid="hero-heading"><%- contentByLang.en['hero-heading'] %></h1>
-          <p contenteditable="true" data-eid="hero-text"><%- contentByLang.en['hero-text'] %></p>
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="hero-cta"><%- contentByLang.en['hero-cta'] %></a>
+          <a href="#contact-footer" class="btn btn-dark" contenteditable="true" data-eid="hero-cta"><%- contentByLang.en['hero-cta'] %></a>
         </div>
       </section>
 
-      <section class="top-workplaces" id="about">
-        <h2 contenteditable="true" data-eid="feat-eyebrow-1"><%- contentByLang.en['feat-eyebrow-1'] %></h2>
-        <p contenteditable="true" data-eid="feat-text-1"><%- contentByLang.en['feat-text-1'] %></p>
+      <section class="about-section" id="about">
+        <div class="about-row">
+          <div class="about-left">
+            <h2 contenteditable="true" data-eid="feat-eyebrow-1"><%- contentByLang.en['feat-eyebrow-1'] %></h2>
+            <p contenteditable="true" data-eid="feat-text-1"><%- contentByLang.en['feat-text-1'] %></p>
+          </div>
+          <div class="about-right">
+            <div class="homeadvisor-badge">
+              <span class="badge-label">HomeAdvisor Top Rated Remodelers</span>
+              <span class="badge-rating">4.9 <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section class="work-section" id="work">
@@ -197,14 +230,14 @@
         </div>
         <div class="work-grid">
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1615965149280-8c380be22930?q=80&w=667&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/hardwood remodeling.png');"></div>
             <div class="work-card__overlay">
               <h3 contenteditable="true" data-eid="svc1-eyebrow"><%- contentByLang.en['svc1-eyebrow'] %></h3>
               <p contenteditable="true" data-eid="svc1-text"><%- contentByLang.en['svc1-text'] %></p>
             </div>
           </div>
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/wood refinishing.png');"></div>
             <div class="work-card__overlay">
               <h3 contenteditable="true" data-eid="svc2-eyebrow"><%- contentByLang.en['svc2-eyebrow'] %></h3>
               <p contenteditable="true" data-eid="svc2-text"><%- contentByLang.en['svc2-text'] %></p>
@@ -218,21 +251,70 @@
             </div>
           </div>
           <div class="work-card">
-            <div class="work-card__image" style="background-image: url('https://images.unsplash.com/photo-1630699376289-b62375a35505?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
+            <div class="work-card__image" style="background-image: url('/service-photos/patio remodeeling.png');"></div>
             <div class="work-card__overlay">
-              <h3 contenteditable="true" data-eid="svc-eyebrow"><%- contentByLang.en['svc-eyebrow'] %></h3>
-              <p contenteditable="true" data-eid="svc-copy"><%- contentByLang.en['svc-copy'] %></p>
+              <h3 contenteditable="true" data-eid="svc4-eyebrow"><%- contentByLang.en['svc4-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc4-text"><%- contentByLang.en['svc4-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/kitchen remodeliing.png');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc5-eyebrow"><%- contentByLang.en['svc5-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc5-text"><%- contentByLang.en['svc5-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/bathroom remodelling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc6-eyebrow"><%- contentByLang.en['svc6-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc6-text"><%- contentByLang.en['svc6-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/fireplace remodeling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc7-eyebrow"><%- contentByLang.en['svc7-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc7-text"><%- contentByLang.en['svc7-text'] %></p>
+            </div>
+          </div>
+          <div class="work-card">
+            <div class="work-card__image" style="background-image: url('/service-photos/staircase remodeling.png');"></div>
+            <div class="work-card__overlay">
+              <h3 contenteditable="true" data-eid="svc8-eyebrow"><%- contentByLang.en['svc8-eyebrow'] %></h3>
+              <p contenteditable="true" data-eid="svc8-text"><%- contentByLang.en['svc8-text'] %></p>
             </div>
           </div>
         </div>
-        <div class="work-cta">
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="work-cta"><%- contentByLang.en['work-cta'] %></a>
-        </div>
       </section>
 
-      <section class="cta-banner" id="process">
-        <h2 contenteditable="true" data-eid="feat-eyebrow-2"><%- contentByLang.en['feat-eyebrow-2'] %></h2>
-        <a href="#contact" class="btn btn-outline-light" contenteditable="true" data-eid="cta-btn"><%- contentByLang.en['cta-btn'] %></a>
+      <section class="gallery-section" id="gallery">
+        <div class="gallery__head">
+          <h2 contenteditable="true" data-eid="gallery-heading"><%- contentByLang.en['gallery-heading'] %></h2>
+          <p contenteditable="true" data-eid="gallery-subtitle"><%- contentByLang.en['gallery-subtitle'] %></p>
+        </div>
+        <% galleryCategories.forEach(function(cat) { %>
+          <% if (cat.files.length > 0) { %>
+            <div class="gallery-category">
+              <h3 class="gallery-cat-title" contenteditable="true" data-eid="gallery-cat-<%= cat.key %>"><%- contentByLang.en['gallery-cat-' + cat.key] %></h3>
+              <div class="gallery-strip">
+                <% cat.files.forEach(function(photo) { %>
+                  <div class="gallery-strip-item">
+                    <img src="/projects/<%= photo %>" alt="<%= photo %>" loading="lazy" />
+                  </div>
+                <% }); %>
+              </div>
+            </div>
+          <% } %>
+        <% }); %>
+      </section>
+
+      <section class="reviews-section" id="reviews">
+        <h2 contenteditable="true" data-eid="reviews-heading"><%- contentByLang.en['reviews-heading'] %></h2>
+        <p contenteditable="true" data-eid="reviews-subtitle"><%- contentByLang.en['reviews-subtitle'] %></p>
+        <div class="reviews-container">
+          <iframe src="https://sites-api.arnalv.net/" class="reviews-iframe" title="Angi Reviews Widget"></iframe>
+        </div>
       </section>
 
       <section class="blog-section" id="blog">
@@ -244,6 +326,7 @@
             <div class="blog-card__body">
               <h3 contenteditable="true" data-eid="card3-heading"><%- contentByLang.en['card3-heading'] %></h3>
               <p contenteditable="true" data-eid="blog-card1-text"><%- contentByLang.en['blog-card1-text'] %></p>
+              <div class="blog-full" contenteditable="true" data-eid="blog-card1-full"><%- contentByLang.en['blog-card1-full'] %></div>
             </div>
           </article>
           <article class="blog-card">
@@ -251,6 +334,7 @@
             <div class="blog-card__body">
               <h3 contenteditable="true" data-eid="card1-heading"><%- contentByLang.en['card1-heading'] %></h3>
               <p contenteditable="true" data-eid="card1-text"><%- contentByLang.en['card1-text'] %></p>
+              <div class="blog-full" contenteditable="true" data-eid="card1-full"><%- contentByLang.en['card1-full'] %></div>
             </div>
           </article>
           <article class="blog-card">
@@ -258,59 +342,44 @@
             <div class="blog-card__body">
               <h3 contenteditable="true" data-eid="card2-eyebrow"><%- contentByLang.en['card2-eyebrow'] %></h3>
               <p contenteditable="true" data-eid="blog-card3-text"><%- contentByLang.en['blog-card3-text'] %></p>
+              <div class="blog-full" contenteditable="true" data-eid="blog-card3-full"><%- contentByLang.en['blog-card3-full'] %></div>
             </div>
           </article>
         </div>
-        <div class="blog-cta">
-          <a href="#contact" class="btn btn-dark" contenteditable="true" data-eid="blog-cta"><%- contentByLang.en['blog-cta'] %></a>
-        </div>
       </section>
 
-      <section class="newsletter-section" id="contact">
-        <h3 contenteditable="true" data-eid="newsletter-eyebrow"><%- contentByLang.en['newsletter-eyebrow'] %></h3>
-        <div class="newsletter-form">
-          <input type="email" placeholder="Your Email Address" />
-          <button class="btn btn-dark" contenteditable="true" data-eid="newsletter-btn"><%- contentByLang.en['newsletter-btn'] %></button>
+      <section class="contact-section" id="contact">
+        <div class="contact-form-container">
+          <h3 contenteditable="true" data-eid="newsletter-eyebrow"><%- contentByLang.en['newsletter-eyebrow'] %></h3>
+          <form class="contact-form" id="contact-form">
+            <textarea name="message" placeholder="Describe what you're looking to do..." required></textarea>
+            <div class="contact-inputs">
+              <input type="email" name="email" placeholder="Your Email" />
+              <input type="tel" name="phone" placeholder="Your Phone Number" />
+            </div>
+            <button type="submit" class="btn btn-dark" contenteditable="true" data-eid="newsletter-btn"><%- contentByLang.en['newsletter-btn'] %></button>
+          </form>
+          <div class="form-success" id="form-success" style="display:none;">
+            <p>Message sent! Someone will contact you back within one business day.</p>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__logo">
-        <span class="mark">PM</span>
-        <h2 contenteditable="true" data-eid="footer-text"><%- contentByLang.en['footer-text'] %></h2>
-      </div>
-      <div class="site-footer__nav">
-        <a href="#about" contenteditable="true" data-eid="footer-nav-about"><%- contentByLang.en['footer-nav-about'] %></a>
-        <a href="#work" contenteditable="true" data-eid="footer-nav-services"><%- contentByLang.en['footer-nav-services'] %></a>
-        <a href="#blog" contenteditable="true" data-eid="footer-nav-blog"><%- contentByLang.en['footer-nav-blog'] %></a>
-        <a href="#contact" contenteditable="true" data-eid="footer-nav-estimate"><%- contentByLang.en['footer-nav-estimate'] %></a>
-      </div>
-      <div class="site-footer__locations">
-        <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc1-heading"><%- contentByLang.en['footer-loc1-heading'] %></h4>
-          <p contenteditable="true" data-eid="footer-loc1-text"><%- contentByLang.en['footer-loc1-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc2-heading"><%- contentByLang.en['footer-loc2-heading'] %></h4>
-          <p contenteditable="true" data-eid="footer-loc2-text"><%- contentByLang.en['footer-loc2-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc3-heading"><%- contentByLang.en['footer-loc3-heading'] %></h4>
-          <p contenteditable="true" data-eid="footer-loc3-text"><%- contentByLang.en['footer-loc3-text'] %></p>
-        </div>
-        <div class="footer-location">
-          <h4 contenteditable="true" data-eid="footer-loc4-heading"><%- contentByLang.en['footer-loc4-heading'] %></h4>
-          <p contenteditable="true" data-eid="footer-loc4-text"><%- contentByLang.en['footer-loc4-text'] %></p>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
+    <footer class="site-footer" id="contact-footer">
+      <div class="footer-cta">
+        <h2 contenteditable="true" data-eid="feat-eyebrow-2"><%- contentByLang.en['feat-eyebrow-2'] %></h2>
+        <a href="tel:2148743789" class="footer-phone" contenteditable="true" data-eid="cta-btn"><%- contentByLang.en['cta-btn'] %></a>
         <div class="social-links">
-          <a href="#" target="_blank" aria-label="Facebook">FB</a>
-          <a href="#" target="_blank" aria-label="Instagram">IG</a>
+          <a href="#" target="_blank" aria-label="Facebook">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" aria-label="Instagram">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
         </div>
-        <small contenteditable="true" data-eid="footer-copyright"><%- contentByLang.en['footer-copyright'] %></small>
       </div>
+      <small class="footer-copyright" contenteditable="true" data-eid="footer-copyright"><%- contentByLang.en['footer-copyright'] %> <%= new Date().getFullYear() %> &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Terms &amp; Conditions</small>
     </footer>
 
     <script>
@@ -462,12 +531,115 @@
         }
       });
 
+      (function() {
+        var header = document.getElementById("site-header");
+        var ticking = false;
+        window.addEventListener("scroll", function() {
+          if (!ticking) {
+            window.requestAnimationFrame(function() {
+              if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+              } else {
+                header.classList.remove("scrolled");
+              }
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+      })();
+
+      (function() {
+        var hamburger = document.getElementById("hamburger");
+        var nav = document.querySelector(".site-header__nav");
+        if (hamburger && nav) {
+          hamburger.addEventListener("click", function() {
+            hamburger.classList.toggle("open");
+            nav.classList.toggle("open");
+          });
+          nav.querySelectorAll("a").forEach(function(link) {
+            link.addEventListener("click", function() {
+              hamburger.classList.remove("open");
+              nav.classList.remove("open");
+            });
+          });
+        }
+      })();
+
       document.addEventListener("keydown", function (e) {
         if ((e.ctrlKey || e.metaKey) && e.key === "s") {
           e.preventDefault();
           saveBtn.click();
         }
       });
+
+      function setupImageReplace(container, updateFn) {
+        container.classList.add("has-replace-btn");
+        if (getComputedStyle(container).position === "static") {
+          container.style.position = "relative";
+        }
+
+        var input = document.createElement("input");
+        input.type = "file";
+        input.accept = "image/*";
+        input.className = "img-replace-input";
+
+        var overlay = document.createElement("div");
+        overlay.className = "img-overlay";
+
+        container.appendChild(overlay);
+        container.appendChild(input);
+
+        container.addEventListener("click", function (e) {
+          if (e.target === input) return;
+          input.click();
+        });
+
+        input.addEventListener("change", function () {
+          var file = input.files[0];
+          if (!file) return;
+
+          setStatus("Uploading...");
+          var fd = new FormData();
+          fd.append("image", file);
+
+          fetch("/api/upload-image", { method: "POST", body: fd })
+            .then(function (r) {
+              if (!r.ok) throw new Error("Upload failed");
+              return r.json();
+            })
+            .then(function (data) {
+              if (data.url) {
+                updateFn(data.url);
+                setStatus("Image updated!");
+                setTimeout(function () { setStatus(""); }, 2000);
+              }
+            })
+            .catch(function (err) {
+              setStatus("Upload error: " + err.message, true);
+            });
+        });
+      }
+
+      var bgContainers = document.querySelectorAll(
+        ".hero__bg, .work-card__image, .blog-card__image"
+      );
+      for (var i = 0; i < bgContainers.length; i++) {
+        setupImageReplace(bgContainers[i], function (url) {
+          this.style.backgroundImage = "url('" + url + "')";
+        }.bind(bgContainers[i]));
+      }
+
+      var galleryItems = document.querySelectorAll(".gallery-strip-item");
+      for (var i = 0; i < galleryItems.length; i++) {
+        (function (item) {
+          var img = item.querySelector("img");
+          if (!img) return;
+          setupImageReplace(item, function (url) {
+            img.src = url;
+          });
+        })(galleryItems[i]);
+      }
     </script>
   </body>
 </html>
