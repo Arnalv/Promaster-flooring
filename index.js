@@ -2,12 +2,28 @@ import "dotenv/config";
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
+import crypto from "crypto";
 import { fileURLToPath } from "url";
 import twilio from "twilio";
 import nodemailer from "nodemailer";
 import multer from "multer";
 import bcrypt from "bcryptjs";
 import session from "express-session";
+import FileStore from "session-file-store";
+import helmet from "helmet";
+import sanitizeHtml from "sanitize-html";
+
+const sanitize = (s) => sanitizeHtml(typeof s === "string" ? s : "", {
+  allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img", "h1", "h2", "span", "div"]),
+  allowedAttributes: {
+    ...sanitizeHtml.defaults.allowedAttributes,
+    "*": ["class", "id", "style"],
+    a: ["href", "target", "class", "id", "style"],
+    img: ["src", "alt", "class", "id", "style"],
+  },
+  allowedSchemes: ["http", "https", "mailto"],
+  disallowedTagsMode: "discard",
+});
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -103,19 +119,78 @@ function loginRateLimiter(req, res, next) {
   next();
 }
 
+const contactAttempts = new Map();
+const CONTACT_MAX = 5;
+const CONTACT_WINDOW_MS = 60 * 1000;
+
+function contactRateLimiter(req, res, next) {
+  const ip = req.ip;
+  const now = Date.now();
+  const data = contactAttempts.get(ip);
+  if (!data || now - data.start > CONTACT_WINDOW_MS) {
+    contactAttempts.set(ip, { count: 1, start: now });
+    return next();
+  }
+  if (data.count >= CONTACT_MAX) {
+    return res.status(429).json({ error: "Too many requests. Try again later." });
+  }
+  data.count++;
+  next();
+}
+
 app.use(express.json({ limit: "1mb" }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.set("trust proxy", 1);
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  res.locals.nonce = crypto.randomBytes(16).toString("hex");
+  next();
+});
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {
   console.warn("WARNING: SESSION_SECRET not set in .env — using insecure default. Set a random value.");
 }
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", (req, res) => `'nonce-${res.locals.nonce}'`],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "https://images.unsplash.com"],
+      frameSrc: ["'self'", "https://sites-api.arnalv.net"],
+      connectSrc: ["'self'"],
+      formAction: ["'self'"],
+    },
+  },
+}));
+
+function cleanupRateLimits() {
+  const now = Date.now();
+  for (const [ip, data] of loginAttempts) {
+    if (now - data.start > LOGIN_WINDOW_MS) loginAttempts.delete(ip);
+  }
+  for (const [ip, data] of contactAttempts) {
+    if (now - data.start > CONTACT_WINDOW_MS) contactAttempts.delete(ip);
+  }
+}
+setInterval(cleanupRateLimits, 60_000);
+
+const SessionFileStore = FileStore(session);
+
 app.use(session({
   secret: sessionSecret || "edit-server-secret",
   resave: false,
   saveUninitialized: false,
+  store: new SessionFileStore({ path: path.join(__dirname, "sessions") }),
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    httpOnly: true,
+  },
 }));
 
 function requireAuth(req, res, next) {
@@ -250,10 +325,16 @@ app.get("/privacy", async (req, res) => {
   }
 });
 
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", sameOrigin, contactRateLimiter, async (req, res) => {
   const { message, email, phone } = req.body;
-  if (!message || typeof message !== "string") {
-    return res.status(400).json({ error: "Message is required" });
+  if (!message || typeof message !== "string" || message.length > 5000) {
+    return res.status(400).json({ error: "Message is required (max 5000 chars)" });
+  }
+  if (email && (typeof email !== "string" || email.length > 320)) {
+    return res.status(400).json({ error: "Invalid email" });
+  }
+  if (phone && (typeof phone !== "string" || phone.length > 30)) {
+    return res.status(400).json({ error: "Invalid phone" });
   }
 
   const text = `New inquiry from promasterfloors.com\n\nMessage: ${message}\nEmail: ${email || "N/A"}\nPhone: ${phone || "N/A"}`;
@@ -386,6 +467,18 @@ app.post("/api/save", requireAuth, sameOrigin, async (req, res) => {
   if (!en || typeof en !== "object") {
     return res.status(400).json({ error: "Invalid data" });
   }
+  for (const text of Object.values(en)) {
+    if (typeof text !== "string" || text.length > 50000) {
+      return res.status(400).json({ error: "Text too long (max 50000 chars)" });
+    }
+  }
+  if (es && typeof es === "object") {
+    for (const text of Object.values(es)) {
+      if (typeof text !== "string" || text.length > 50000) {
+        return res.status(400).json({ error: "Text too long (max 50000 chars)" });
+      }
+    }
+  }
 
   let pendingMoved = false;
 
@@ -406,19 +499,21 @@ app.post("/api/save", requireAuth, sameOrigin, async (req, res) => {
     }
 
     for (const [eid, text] of Object.entries(en)) {
+      const clean = sanitize(text);
       if (content[eid]) {
-        content[eid].en = text;
+        content[eid].en = clean;
       } else {
-        content[eid] = { en: text, es: "" };
+        content[eid] = { en: clean, es: "" };
       }
     }
 
     const finalEs = es && typeof es === "object" ? { ...es } : {};
     for (const [eid, text] of Object.entries(finalEs)) {
+      const clean = sanitize(text);
       if (content[eid]) {
-        content[eid].es = text;
+        content[eid].es = clean;
       } else {
-        content[eid] = { en: "", es: text };
+        content[eid] = { en: "", es: clean };
       }
     }
 

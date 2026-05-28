@@ -460,7 +460,7 @@
       <small class="footer-copyright" contenteditable="true" data-eid="footer-copyright"><%- contentByLang.en['footer-copyright'] %> <%= new Date().getFullYear() %> &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Terms &amp; Conditions</small>
     </footer>
 
-    <script>
+    <script nonce="<%= nonce %>">
       var ALL_CONTENT = <%- JSON.stringify(content) %>;
       var edits = { en: {}, es: {} };
       var dirtyEn = {};
