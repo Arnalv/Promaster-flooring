@@ -23,6 +23,25 @@ const sanitize = (s) => sanitizeHtml(typeof s === "string" ? s : "", {
   },
   allowedSchemes: ["http", "https", "mailto"],
   disallowedTagsMode: "discard",
+  allowedStyles: {
+    "*": {
+      color: [/^(?!.*\burl)/i],
+      "background-color": [/^(?!.*\burl)/i],
+      "font-size": [/^(?!.*\burl)/i],
+      "font-family": [/^(?!.*\burl)/i],
+      "font-weight": [/^(?!.*\burl)/i],
+      "font-style": [/^(?!.*\burl)/i],
+      "text-decoration": [/^(?!.*\burl)/i],
+      "text-align": [/^(?!.*\burl)/i],
+      "line-height": [/^(?!.*\burl)/i],
+      "margin-left": [/^(?!.*\burl)/i],
+      "padding-left": [/^(?!.*\burl)/i],
+      "vertical-align": [/^(?!.*\burl)/i],
+      "list-style-type": [/^(?!.*\burl)/i],
+      "width": [/^(?!.*\burl)/i],
+      "height": [/^(?!.*\burl)/i],
+    },
+  },
 });
 
 const __filename = fileURLToPath(import.meta.url);
