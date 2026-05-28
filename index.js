@@ -54,13 +54,66 @@ async function translateText(text, to) {
   return result.text;
 }
 
+async function validateImageFile(filePath) {
+  const fd = await fs.open(filePath, "r");
+  const buf = Buffer.alloc(8);
+  await fd.read(buf, 0, 8, 0);
+  await fd.close();
+  if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) return true;
+  if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E) return true;
+  if (buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46) return true;
+  return false;
+}
+
+function sameOrigin(req, res, next) {
+  const host = req.headers.host;
+  const origin = req.headers.origin;
+  const referer = req.headers.referer;
+  if (origin && !origin.includes(host)) {
+    return res.status(403).json({ error: "Cross-origin request rejected" });
+  }
+  if (!origin && referer) {
+    try {
+      if (new URL(referer).host !== host) {
+        return res.status(403).json({ error: "Cross-origin request rejected" });
+      }
+    } catch {
+      return res.status(403).json({ error: "Invalid request" });
+    }
+  }
+  next();
+}
+
+const loginAttempts = new Map();
+const LOGIN_MAX = 10;
+const LOGIN_WINDOW_MS = 15 * 60 * 1000;
+
+function loginRateLimiter(req, res, next) {
+  const ip = req.ip;
+  const now = Date.now();
+  const data = loginAttempts.get(ip);
+  if (!data || now - data.start > LOGIN_WINDOW_MS) {
+    loginAttempts.set(ip, { count: 1, start: now });
+    return next();
+  }
+  if (data.count >= LOGIN_MAX) {
+    return res.status(429).render("login", { error: "Too many attempts. Try again later." });
+  }
+  data.count++;
+  next();
+}
+
 app.use(express.json({ limit: "1mb" }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 
+const sessionSecret = process.env.SESSION_SECRET;
+if (!sessionSecret) {
+  console.warn("WARNING: SESSION_SECRET not set in .env — using insecure default. Set a random value.");
+}
 app.use(session({
-  secret: process.env.SESSION_SECRET || "edit-server-secret",
+  secret: sessionSecret || "edit-server-secret",
   resave: false,
   saveUninitialized: false,
 }));
@@ -76,7 +129,7 @@ app.get("/login", (req, res) => {
   res.render("login", { error: null });
 });
 
-app.post("/login", express.urlencoded({ extended: false }), async (req, res) => {
+app.post("/login", express.urlencoded({ extended: false }), loginRateLimiter, async (req, res) => {
   const { username, password } = req.body;
   const expectedUser = process.env.EDIT_USERNAME;
   const expectedHash = process.env.EDIT_PASSWORD_HASH;
@@ -233,6 +286,9 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
+    if (file.mimetype === "image/svg+xml" || path.extname(file.originalname).toLowerCase() === ".svg") {
+      return cb(new Error("SVG files are not allowed"));
+    }
     if (!file.mimetype.startsWith("image/")) {
       return cb(new Error("Only image files are allowed"));
     }
@@ -253,6 +309,9 @@ const projectUpload = multer({
   storage: projectStorage,
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
+    if (file.mimetype === "image/svg+xml" || path.extname(file.originalname).toLowerCase() === ".svg") {
+      return cb(new Error("SVG files are not allowed"));
+    }
     if (!file.mimetype.startsWith("image/")) {
       return cb(new Error("Only image files are allowed"));
     }
@@ -322,7 +381,7 @@ app.get("/edit", requireAuth, async (req, res) => {
   });
 });
 
-app.post("/api/save", requireAuth, async (req, res) => {
+app.post("/api/save", requireAuth, sameOrigin, async (req, res) => {
   const { en, es, dirtyEn, dirtyEs } = req.body;
   if (!en || typeof en !== "object") {
     return res.status(400).json({ error: "Invalid data" });
@@ -405,8 +464,8 @@ app.post("/api/save", requireAuth, async (req, res) => {
   }
 });
 
-app.post("/api/upload-image", requireAuth, (req, res) => {
-  upload.single("image")(req, res, (err) => {
+app.post("/api/upload-image", requireAuth, sameOrigin, (req, res) => {
+  upload.single("image")(req, res, async (err) => {
     if (err instanceof multer.MulterError) {
       return res.status(400).json({ error: err.message });
     }
@@ -415,13 +474,23 @@ app.post("/api/upload-image", requireAuth, (req, res) => {
     }
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
+    }
+    try {
+      const valid = await validateImageFile(req.file.path);
+      if (!valid) {
+        await fs.unlink(req.file.path).catch(() => {});
+        return res.status(400).json({ error: "Invalid image file" });
+      }
+    } catch {
+      await fs.unlink(req.file.path).catch(() => {});
+      return res.status(500).json({ error: "File validation failed" });
     }
     res.json({ url: "/uploads/" + req.file.filename });
   });
 });
 
-app.post("/api/upload-gallery", requireAuth, (req, res) => {
-  projectUpload.single("image")(req, res, (err) => {
+app.post("/api/upload-gallery", requireAuth, sameOrigin, (req, res) => {
+  projectUpload.single("image")(req, res, async (err) => {
     if (err instanceof multer.MulterError) {
       return res.status(400).json({ error: err.message });
     }
@@ -431,11 +500,21 @@ app.post("/api/upload-gallery", requireAuth, (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
+    try {
+      const valid = await validateImageFile(req.file.path);
+      if (!valid) {
+        await fs.unlink(req.file.path).catch(() => {});
+        return res.status(400).json({ error: "Invalid image file" });
+      }
+    } catch {
+      await fs.unlink(req.file.path).catch(() => {});
+      return res.status(500).json({ error: "File validation failed" });
+    }
     res.json({ url: "/projects/pending/" + req.file.filename, pending: true });
   });
 });
 
-app.delete("/api/gallery", requireAuth, async (req, res) => {
+app.delete("/api/gallery", requireAuth, sameOrigin, async (req, res) => {
   const filename = req.query.filename;
   if (!filename || typeof filename !== "string") {
     return res.status(400).json({ error: "Invalid filename" });
@@ -455,7 +534,7 @@ app.delete("/api/gallery", requireAuth, async (req, res) => {
   }
 });
 
-app.post("/api/translate", requireAuth, async (req, res) => {
+app.post("/api/translate", requireAuth, sameOrigin, async (req, res) => {
   const { text, to } = req.body;
   if (!text || typeof text !== "string") {
     return res.status(400).json({ error: "Invalid text" });
@@ -470,7 +549,7 @@ app.post("/api/translate", requireAuth, async (req, res) => {
   }
 });
 
-app.post("/api/translate-all", requireAuth, async (req, res) => {
+app.post("/api/translate-all", requireAuth, sameOrigin, async (req, res) => {
   const { texts, to } = req.body;
   if (!texts || typeof texts !== "object") {
     return res.status(400).json({ error: "Invalid data" });
